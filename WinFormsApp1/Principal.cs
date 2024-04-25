@@ -1,0 +1,112 @@
+using System.Linq.Expressions;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
+namespace WinFormsApp1
+{
+    public partial class Principal : Form
+    {
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,
+             int nTopRect,
+             int nRightRect,
+             int nBottomRect,
+             int nWidthEllipse,
+             int wHeightEllipse);
+        public Principal()
+        {
+            InitializeComponent();
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            button_Click(button_dashboard,e);
+            MostrarFormulario(new Dashboard(this));
+        }
+
+
+        private void SetNavigation(object sender)
+        {
+            foreach (Control objeto in panel_sidebar.Controls)
+            {
+                if (objeto is Button btns)
+                {
+                    btns.BackColor = Color.FromArgb(23, 25, 31);
+                }
+            }
+            Button? clickedButton = sender as Button;
+            if (clickedButton != null)
+            {
+                PnlNav.Height = clickedButton.Height;
+                PnlNav.Top = clickedButton.Top;
+                PnlNav.Left = clickedButton.Left;
+                clickedButton.BackColor = Color.FromArgb(76, 79, 81);
+            }
+        }
+
+        public void button_Click(object sender, EventArgs e)
+        {
+            SetNavigation(sender);
+            Button? btn = sender as Button;
+            Panel? pln = sender as Panel;
+            if (btn != null) { 
+                switch (btn.Name)
+                {
+                    case "button_dashboard":
+                        MostrarFormulario(new Dashboard(this));
+                        break;
+                    case "button_clientes":
+                        MostrarFormulario(new Clientes());
+                        break;
+                    // Adicione os outros casos conforme necessário
+                    default:
+                        // Caso nenhum botão corresponda, não faz nada
+                        break;
+                }
+            }
+
+            if (pln != null) {
+            switch (pln.Name)
+            {
+                case "panel_clientes":
+                        SetNavigation(button_clientes);
+                        MostrarFormulario(new Clientes());
+                        break;
+                case "panel_produtos":
+                        //codigo
+                        break;
+                case "panel_encomendas":
+                        break;
+            }
+            }
+
+        }
+
+        private void MostrarFormulario(Form formulario)
+        {
+            panel_principal.Controls.Clear();
+
+            formulario.FormBorderStyle = FormBorderStyle.None;
+            formulario.TopLevel = false;
+            formulario.Size = panel_principal.Size;
+
+            panel_principal.Controls.Add(formulario);
+
+            formulario.Show();
+        }
+
+        private void button_sair_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pictureBox_aviso_dashboard_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Esta é a página inicial, apenas mostra o essencial. Para mais detalhes use os botões ao lado para ver as outras janelas.", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
+}
