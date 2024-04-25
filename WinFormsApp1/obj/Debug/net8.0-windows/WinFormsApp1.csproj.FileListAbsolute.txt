@@ -36,41 +36,43 @@ C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\bin\Debug\net8.0-
 C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinForms.DataVisualization.dll
 C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Dashboard.resources
 C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Clientes.resources
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.exe
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.deps.json
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.runtimeconfig.json
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.pdb
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\EntityFramework.SqlServer.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\EntityFramework.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\SQLitePCLRaw.core.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\System.Data.SQLite.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\System.Data.SQLite.EF6.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinForms.DataVisualization.Utilities.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinForms.DataVisualization.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.AssemblyReference.cache
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Clientes.resources
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Dashboard.resources
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Principal.resources
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Properties.Resources.resources
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.GenerateResource.cache
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfoInputs.cache
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfo.cs
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.CoreCompileInputs.cache
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinForms.E4050A35.Up2Date
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\refint\WinFormsApp1.dll
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.pdb
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
-D:\Tranferencias\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll
+C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Produtos.resources
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.exe
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.deps.json
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.runtimeconfig.json
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinFormsApp1.pdb
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\EntityFramework.SqlServer.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\EntityFramework.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\SQLitePCLRaw.core.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\System.Data.SQLite.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\System.Data.SQLite.EF6.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinForms.DataVisualization.Utilities.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\WinForms.DataVisualization.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\linux-x64\native\SQLite.Interop.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\osx-x64\native\SQLite.Interop.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x64\native\SQLite.Interop.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win-x86\native\SQLite.Interop.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.AssemblyReference.cache
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Clientes.resources
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Dashboard.resources
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Principal.resources
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Produtos.resources
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Properties.Resources.resources
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.GenerateResource.cache
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfoInputs.cache
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.AssemblyInfo.cs
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.csproj.CoreCompileInputs.cache
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinForms.E4050A35.Up2Date
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\refint\WinFormsApp1.dll
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.pdb
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.genruntimeconfig.cache
+D:\Tranferencias\Trabalho V0.02\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\ref\WinFormsApp1.dll

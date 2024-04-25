@@ -235,6 +235,7 @@
             // 
             // pictureBox_icon
             // 
+            pictureBox_icon.BorderStyle = BorderStyle.FixedSingle;
             pictureBox_icon.Image = (Image)resources.GetObject("pictureBox_icon.Image");
             pictureBox_icon.Location = new Point(27, 22);
             pictureBox_icon.Name = "pictureBox_icon";

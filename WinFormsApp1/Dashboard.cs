@@ -30,10 +30,9 @@ namespace WinFormsApp1
 
             public static SQLiteConnection Conectar()
             { //liga a base de dados
-              //depois mudar para caminho absuluto
-              //"D:\Tranferencias\Trabalho\bd\Rissois.db"
-                string caminho = "Data Source=\"D:\\Tranferencias\\Trabalho\\bd\\Rissois.db\"; Version=3; journal mode=Off;";
-
+                //depois mudar para caminho absuluto
+                //"D:\Tranferencias\Trabalho V0.02\Trabalho\bd\Rissois.db"
+                string caminho = "Data Source=\"D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\bd\\Rissois.db\";Version=3;";
                 conexao = new SQLiteConnection(caminho);
                 if (conexao.State == ConnectionState.Closed)
                 {
@@ -130,7 +129,7 @@ namespace WinFormsApp1
         }
 
         private void ArredondarBordas(Panel panel, int raio)
-        {
+        {//função que faz com que o panel tenha pontas curvas
             GraphicsPath path = new GraphicsPath();
             path.AddArc(panel.ClientRectangle.Width - raio, 0, raio, raio, 270, 90);
             path.AddArc(panel.ClientRectangle.Width - raio, panel.ClientRectangle.Height - raio, raio, raio, 0, 90);
@@ -146,9 +145,10 @@ namespace WinFormsApp1
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            foreach(Control objeto in Controls)
-            {
-                if(objeto is Panel pln) {
+            foreach (Control objeto in Controls)
+            {//vai arredondar as bordas de todos os panels do form 
+                if (objeto is Panel pln)
+                {
                     ArredondarBordas(pln, 50);
                 }
             }
@@ -157,17 +157,20 @@ namespace WinFormsApp1
             label_num_produtos.Text = Convert.ToString(Funcs.NumeroProdutos());
             label_num_encomendas.Text = Convert.ToString(Funcs.NumeroEncomendas());
             //falta fazer um grafico
+
+
+
+
+
+
+
+
         }
 
         private void panel_Click(object sender, EventArgs e)
         {
             //dependendo do panel vai mandar o sender para a função para mudar de janela
             principal.button_Click(sender, EventArgs.Empty);
-        }
-
-        private void label_dashboard_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tranferencias\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {}
+    "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {}
   },
   "projects": {
-    "D:\\Tranferencias\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {
+    "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tranferencias\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectUniqueName": "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
         "projectName": "WinFormsApp1",
-        "projectPath": "D:\\Tranferencias\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectPath": "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Tranferencias\\Trabalho\\WinFormsApp1\\obj\\",
+        "outputPath": "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,9 +53,9 @@
               "target": "Package",
               "version": "[1.0.118, )"
             },
-            "System.Data.SqlClient": {
+            "System.Threading": {
               "target": "Package",
-              "version": "[4.8.6, )"
+              "version": "[4.3.0, )"
             },
             "System.Threading.Timer": {
               "target": "Package",

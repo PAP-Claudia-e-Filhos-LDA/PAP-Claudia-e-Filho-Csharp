@@ -53,6 +53,7 @@ namespace WinFormsApp1
             SetNavigation(sender);
             Button? btn = sender as Button;
             Panel? pln = sender as Panel;
+            PictureBox? img = sender as PictureBox;
             if (btn != null) { 
                 switch (btn.Name)
                 {
@@ -62,7 +63,9 @@ namespace WinFormsApp1
                     case "button_clientes":
                         MostrarFormulario(new Clientes());
                         break;
-                    // Adicione os outros casos conforme necessário
+                    case "button_produtos":
+                        MostrarFormulario(new Produtos());
+                        break;
                     default:
                         // Caso nenhum botão corresponda, não faz nada
                         break;
@@ -77,11 +80,22 @@ namespace WinFormsApp1
                         MostrarFormulario(new Clientes());
                         break;
                 case "panel_produtos":
-                        //codigo
+                        SetNavigation(button_produtos);
+                        MostrarFormulario(new Produtos());
                         break;
                 case "panel_encomendas":
                         break;
             }
+                if(img != null)
+                {
+                    switch (img.Name)
+                    {
+                        case "pictureBox_icon_limpar":
+                            SetNavigation(button_produtos);
+                            MostrarFormulario(new Produtos());
+                            break;
+                    }
+                }
             }
 
         }
@@ -102,11 +116,6 @@ namespace WinFormsApp1
         private void button_sair_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void pictureBox_aviso_dashboard_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Esta é a página inicial, apenas mostra o essencial. Para mais detalhes use os botões ao lado para ver as outras janelas.", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

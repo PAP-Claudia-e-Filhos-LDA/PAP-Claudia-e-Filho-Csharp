@@ -42,10 +42,10 @@
             label_dashboard_produtos = new Label();
             pictureBox_dashboard_icon_produtos = new PictureBox();
             panel_clientes = new Panel();
+            pictureBox1 = new PictureBox();
             label_num_clientes = new Label();
             label_linha_dashboard_clientes = new Label();
             label_dashboard_clientes = new Label();
-            pictureBox_dashboard_icon_clientes = new PictureBox();
             label_linha_dashboard = new Label();
             label_dashboard = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox_aviso_dashboard).BeginInit();
@@ -54,7 +54,7 @@
             panel_produtos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox_dashboard_icon_produtos).BeginInit();
             panel_clientes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox_dashboard_icon_clientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pictureBox_aviso_dashboard
@@ -195,10 +195,10 @@
             // panel_clientes
             // 
             panel_clientes.BackColor = Color.FromArgb(23, 25, 31);
+            panel_clientes.Controls.Add(pictureBox1);
             panel_clientes.Controls.Add(label_num_clientes);
             panel_clientes.Controls.Add(label_linha_dashboard_clientes);
             panel_clientes.Controls.Add(label_dashboard_clientes);
-            panel_clientes.Controls.Add(pictureBox_dashboard_icon_clientes);
             panel_clientes.Cursor = Cursors.Hand;
             panel_clientes.Location = new Point(26, 508);
             panel_clientes.Name = "panel_clientes";
@@ -206,12 +206,22 @@
             panel_clientes.TabIndex = 9;
             panel_clientes.Click += panel_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(7, 15);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(32, 32);
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            // 
             // label_num_clientes
             // 
             label_num_clientes.AutoSize = true;
             label_num_clientes.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label_num_clientes.ForeColor = Color.White;
-            label_num_clientes.Location = new Point(79, 80);
+            label_num_clientes.Location = new Point(63, 80);
             label_num_clientes.Name = "label_num_clientes";
             label_num_clientes.Size = new Size(74, 86);
             label_num_clientes.TabIndex = 3;
@@ -221,33 +231,23 @@
             // 
             label_linha_dashboard_clientes.AutoSize = true;
             label_linha_dashboard_clientes.ForeColor = Color.FromArgb(253, 156, 58);
-            label_linha_dashboard_clientes.Location = new Point(57, 2);
+            label_linha_dashboard_clientes.Location = new Point(43, 2);
             label_linha_dashboard_clientes.Name = "label_linha_dashboard_clientes";
-            label_linha_dashboard_clientes.Size = new Size(87, 15);
+            label_linha_dashboard_clientes.Size = new Size(102, 15);
             label_linha_dashboard_clientes.TabIndex = 2;
-            label_linha_dashboard_clientes.Text = "________________";
+            label_linha_dashboard_clientes.Text = "___________________";
             // 
             // label_dashboard_clientes
             // 
             label_dashboard_clientes.AutoSize = true;
             label_dashboard_clientes.BackColor = Color.Transparent;
-            label_dashboard_clientes.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label_dashboard_clientes.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label_dashboard_clientes.ForeColor = Color.Transparent;
-            label_dashboard_clientes.Location = new Point(53, 15);
+            label_dashboard_clientes.Location = new Point(38, 15);
             label_dashboard_clientes.Name = "label_dashboard_clientes";
-            label_dashboard_clientes.Size = new Size(104, 32);
+            label_dashboard_clientes.Size = new Size(119, 37);
             label_dashboard_clientes.TabIndex = 1;
             label_dashboard_clientes.Text = "Clientes";
-            // 
-            // pictureBox_dashboard_icon_clientes
-            // 
-            pictureBox_dashboard_icon_clientes.Image = (Image)resources.GetObject("pictureBox_dashboard_icon_clientes.Image");
-            pictureBox_dashboard_icon_clientes.Location = new Point(17, 15);
-            pictureBox_dashboard_icon_clientes.Name = "pictureBox_dashboard_icon_clientes";
-            pictureBox_dashboard_icon_clientes.Size = new Size(32, 32);
-            pictureBox_dashboard_icon_clientes.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox_dashboard_icon_clientes.TabIndex = 0;
-            pictureBox_dashboard_icon_clientes.TabStop = false;
             // 
             // label_linha_dashboard
             // 
@@ -297,7 +297,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox_dashboard_icon_produtos).EndInit();
             panel_clientes.ResumeLayout(false);
             panel_clientes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox_dashboard_icon_clientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -312,7 +312,6 @@
         private Label label_num_clientes;
         private Label label_linha_dashboard_clientes;
         private Label label_dashboard_clientes;
-        private PictureBox pictureBox_dashboard_icon_clientes;
         private Label label_linha_dashboard;
         private Label label_dashboard;
         private Label label_linha_dashboard_produtos;
@@ -323,5 +322,6 @@
         private Label label_num_encomendas;
         private PictureBox pictureBox_icon_encomendas;
         private Label label_encomendas;
+        private PictureBox pictureBox1;
     }
 }
