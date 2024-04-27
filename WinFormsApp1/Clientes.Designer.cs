@@ -168,6 +168,7 @@
             dataGridView_clientes.EnableHeadersVisualStyles = false;
             dataGridView_clientes.GridColor = Color.FromArgb(23, 25, 31);
             dataGridView_clientes.Location = new Point(0, 0);
+            dataGridView_clientes.MultiSelect = false;
             dataGridView_clientes.Name = "dataGridView_clientes";
             dataGridView_clientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView_clientes.RowHeadersVisible = false;
@@ -239,6 +240,7 @@
             dataGridView_melhores_clientes.EnableHeadersVisualStyles = false;
             dataGridView_melhores_clientes.GridColor = Color.FromArgb(23, 25, 31);
             dataGridView_melhores_clientes.Location = new Point(0, 77);
+            dataGridView_melhores_clientes.MultiSelect = false;
             dataGridView_melhores_clientes.Name = "dataGridView_melhores_clientes";
             dataGridView_melhores_clientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView_melhores_clientes.RowHeadersVisible = false;

@@ -196,6 +196,7 @@
             textBox_preço.Name = "textBox_preço";
             textBox_preço.Size = new Size(36, 23);
             textBox_preço.TabIndex = 26;
+            textBox_preço.KeyPress += textBox_preço_KeyPress;
             // 
             // label4
             // 
@@ -219,6 +220,7 @@
             textBox_nome_produto.Name = "textBox_nome_produto";
             textBox_nome_produto.Size = new Size(100, 23);
             textBox_nome_produto.TabIndex = 24;
+            textBox_nome_produto.KeyPress += textBox_nome_produto_KeyPress;
             // 
             // label3
             // 
@@ -376,12 +378,15 @@
             dataGridView_produtos.EnableHeadersVisualStyles = false;
             dataGridView_produtos.GridColor = Color.FromArgb(23, 25, 31);
             dataGridView_produtos.Location = new Point(0, 0);
+            dataGridView_produtos.MultiSelect = false;
             dataGridView_produtos.Name = "dataGridView_produtos";
             dataGridView_produtos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView_produtos.RowHeadersVisible = false;
+            dataGridView_produtos.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridView_produtos.Size = new Size(617, 660);
             dataGridView_produtos.TabIndex = 0;
             dataGridView_produtos.CellClick += dataGridView_produtos_CellContentClick;
+            dataGridView_produtos.MouseDown += dataGridView_produtos_MouseDown;
             // 
             // label_linha
             // 

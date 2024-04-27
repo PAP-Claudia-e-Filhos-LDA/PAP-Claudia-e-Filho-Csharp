@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {}
+    "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {}
   },
   "projects": {
-    "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {
+    "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
+        "projectUniqueName": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
         "projectName": "WinFormsApp1",
-        "projectPath": "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\Tranferencias\\Trabalho V0.02\\Trabalho\\WinFormsApp1\\obj\\",
+        "projectPath": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\WinFormsApp1.csproj",
+        "packagesPath": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tecnimoplas.TECNIMOPLAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
