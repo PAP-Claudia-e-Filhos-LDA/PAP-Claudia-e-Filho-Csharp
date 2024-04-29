@@ -8,6 +8,7 @@ using static System.Windows.Forms.DataFormats;
 using System.Drawing.Drawing2D;
 namespace WinFormsApp1
 {
+    //nao otimizado
     public partial class Principal : Form
     {
         //classe com as Funções
@@ -254,6 +255,30 @@ namespace WinFormsApp1
                 {
                     dataGridView.Columns[i].HeaderText = headers[i];
                 }
+            }
+            public static long IdProduto(string nomeProduto)
+            {//vai buscar o id_produto pelo nome do mesmo
+                SQLiteConnection conexao = Conectar();
+                long id = 0;
+                try
+                {
+                    string query = "SELECT id_produto from Produtos where nome_produto = '" + nomeProduto + "'";
+                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    {
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                id = reader.GetInt64(0);
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    Desconectar();
+                }
+                return id;
             }
 
         }

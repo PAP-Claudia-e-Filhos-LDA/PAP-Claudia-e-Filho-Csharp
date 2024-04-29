@@ -48,6 +48,7 @@
             comboBox_entrega = new ComboBox();
             label1 = new Label();
             label2 = new Label();
+            label_msg_erro = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox_aviso_encomendas).BeginInit();
             panel_grafico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_clientes).BeginInit();
@@ -213,6 +214,7 @@
             dataGridView_produtos.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dataGridView_produtos.Size = new Size(362, 589);
             dataGridView_produtos.TabIndex = 0;
+            dataGridView_produtos.EditingControlShowing += dataGridView_produtos_EditingControlShowing;
             // 
             // pictureBox1
             // 
@@ -285,12 +287,22 @@
             label2.TabIndex = 44;
             label2.Text = "Metedo de Entrega";
             // 
+            // label_msg_erro
+            // 
+            label_msg_erro.AutoSize = true;
+            label_msg_erro.ForeColor = Color.Red;
+            label_msg_erro.Location = new Point(307, 133);
+            label_msg_erro.Name = "label_msg_erro";
+            label_msg_erro.Size = new Size(0, 15);
+            label_msg_erro.TabIndex = 45;
+            // 
             // Encomendas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 49, 51);
             ClientSize = new Size(991, 791);
+            Controls.Add(label_msg_erro);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(comboBox_entrega);
@@ -334,5 +346,6 @@
         private ComboBox comboBox_entrega;
         private Label label1;
         private Label label2;
+        private Label label_msg_erro;
     }
 }

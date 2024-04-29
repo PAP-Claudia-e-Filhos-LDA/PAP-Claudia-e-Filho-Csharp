@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinFormsApp1
-{
+{ //nao otimizdao
     public partial class Encomendas : Form
     {
         private Principal principal;
@@ -71,6 +73,7 @@ namespace WinFormsApp1
             //faz com que o valor default seja 0 nessa coluna toda
             dataGridView_produtos.Columns["Quantidade"].DefaultCellStyle.NullValue = "0";
 
+
             //faz com que as duas comboboxs comecem ja com valores 
             comboBox_entrega.SelectedIndex = 0;
             comboBox_pagemento.SelectedIndex = 0;
@@ -87,26 +90,25 @@ namespace WinFormsApp1
                 principal.button_Click(pictureBox_limpar_encomendas, EventArgs.Empty);
             }
         }
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             //variavel com a data da encomenda
             DateTime dataAtual = DateTime.Now;  //ja tenho
 
             //vai formatar a data para ficar ano,mes,dia
-            string? dataFormatada = dataAtual.ToString("yyyy/MM/dd");
+            string? dataFormatada = dataAtual.ToString("yyyy-MM-dd");
 
             //0 pickup , 1 entrega ao domicilio
             //0 pagamento em maos , 1 MBway
             bool? metedo_pagamento = false;      //ja tenho
             bool? metedo_entrega = false;        //ja tenho
-            if(comboBox_pagemento.SelectedIndex == 1)
+            if (comboBox_pagemento.SelectedIndex == 1)
             {
                 metedo_pagamento = true;
             }
-            if(comboBox_entrega.SelectedIndex == 1)
+            if (comboBox_entrega.SelectedIndex == 1)
             {
-                metedo_entrega= true;
+                metedo_entrega = true;
             }
 
             //nome do cliente
@@ -114,8 +116,101 @@ namespace WinFormsApp1
             long? id = Principal.Funcs.IdCliente(clienteSelecionado); //ja tenho 
 
             //id da encomenda
-            long numero_encomendas = Principal.Funcs.NumeroEncomendas() +1; //ja tenho
-        
+            long numero_encomendas = Principal.Funcs.NumeroEncomendas() + 1; //ja tenho
+
+            //mensagem predefinida que vou por
+            string mensagem = "Encomenda feita pelo administrador";
+
+            SendKeys.SendWait("{TAB}");
+
+            //ver os produtos todos
+            if (dataGridView_produtos.SelectedRows.Count > 0)
+            {
+                //entra aqui e passa so pelos produtos que tem o checkbox de encomendar ativa 
+                foreach (DataGridViewRow row in dataGridView_produtos.Rows)
+                {
+                    //aqui dentro vou fazer a linha de encomendas
+                    DataGridViewCheckBoxCell encomendar = row.Cells["encomendar"] as DataGridViewCheckBoxCell;
+                    if (Convert.ToBoolean(encomendar.Value) == true)
+                    {
+
+                        string query = @"INSERT INTO Encomendas ('id_encomendas','id_clientes','data_encomenda','metedo_pagamento','metedo_entrega','mensagem') VALUES (@idEncomenda,@idClientes,@Data,@pagamento,@entrega,@mensagem)";
+
+                        //command que vai executar a querry com a conexao e as variaveis certas
+                        using (var command = new SQLiteCommand(query, Principal.Funcs.Conectar()))
+                        {
+                            command.Parameters.AddWithValue("@idEncomenda", numero_encomendas);
+                            command.Parameters.AddWithValue("@idClientes", id);
+                            command.Parameters.AddWithValue("@Data", dataFormatada);
+                            command.Parameters.AddWithValue("@pagamento", metedo_pagamento);
+                            command.Parameters.AddWithValue("@entrega", metedo_entrega);
+                            command.Parameters.AddWithValue("@mensagem", mensagem);
+
+                            command.ExecuteNonQuery();
+                        }
+
+                        //id_encomenda = numero_encomenda
+                        string? nomeProduto = row.Cells["nome_produto"].Value.ToString(); //ja tenho 
+                        long? idProduto = Principal.Funcs.IdProduto(nomeProduto);
+                        bool? congelado = Convert.ToBoolean(row.Cells["fritar"].Value); // ja tenho true = fritar , false = congelados
+                        int quantidade = 0;
+                        try
+                        {
+                            quantidade = Convert.ToInt32(row.Cells["quantidade"].Value);
+                            if(quantidade <=0)
+                            {
+                                string querry = @"INSERT INTO Linha_de_Encomenda ('Encomendas_id_Encomendas','Produtos_id_produto','congelados','quantidade') VALUES (@idEncomenda, @idPRoduto, @congelados ,@quantidade)";
+                                //command que vai executar a querry com a conexao e as variaveis certas
+                                using (var command = new SQLiteCommand(querry, Principal.Funcs.Conectar()))
+                                {
+                                    command.Parameters.AddWithValue("@idEncomenda", numero_encomendas);
+                                    command.Parameters.AddWithValue("@idPRoduto", idProduto);
+                                    command.Parameters.AddWithValue("@congelados", congelado);
+                                    command.Parameters.AddWithValue("@quantidade", quantidade);
+
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                            MessageBox.Show("Encomenda adicionada com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Encomenda não adicionada", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+
+            principal.button_Click(pictureBox_limpar_encomendas, EventArgs.Empty);
+
+        }
+
+        private void dataGridView_produtos_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (dataGridView_produtos.CurrentCell.ColumnIndex == dataGridView_produtos.Columns["quantidade"].Index) // Verifica se a célula atual pertence à coluna "quantidade"
+            {
+                TextBox textBox = e.Control as TextBox; // Obtém o controlo de edição (TextBox) da célula
+
+                if (textBox != null)
+                {
+                    textBox.KeyPress -= PermitirNumerosEPontoDecimal;
+                    textBox.KeyPress += PermitirNumerosEPontoDecimal;
+                }
+            }
+        }
+        private void PermitirNumerosEPontoDecimal(object sender, KeyPressEventArgs e)
+        {
+            //função que so deixa passar numeros e um . caso seja decimal e 2 casas decimais
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+            TextBox? textBox = sender as TextBox;
+            string newText = textBox.Text.Substring(0, textBox.SelectionStart) + e.KeyChar + textBox.Text.Substring(textBox.SelectionStart + textBox.SelectionLength);
+            if (newText.Length > 2 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

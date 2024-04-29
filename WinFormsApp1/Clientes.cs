@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 
 namespace WinFormsApp1
-{
+{ //otimizado
     public partial class Clientes : Form
     {
         public Clientes()
@@ -13,7 +13,6 @@ namespace WinFormsApp1
             ConfigurarDataGridView(dataGridView_clientes);
             ConfigurarDataGridView(dataGridView_melhores_clientes);
         }
-
         private void ConfigurarDataGridView(DataGridView dataGridView)
         {
             //vai usar estas formatações para configurar as datagridview

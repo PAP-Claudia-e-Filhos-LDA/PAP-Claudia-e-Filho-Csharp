@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace WinFormsApp1
-{
+{ //otimizado
     public partial class Dashboard : Form
     {
         private readonly Principal principal;
