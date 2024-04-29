@@ -223,6 +223,39 @@ namespace WinFormsApp1
                 return dtProdutos;
 
             }
+            public static long IdCliente(string nomeCliente)
+            {//vai buscar o id_cliente pelo nome do mesmo
+                SQLiteConnection conexao = Conectar();
+                long id = 0;
+                try
+                {
+                    string query = "SELECT id_clientes from Clientes where nome_cliente = '"+nomeCliente+"'";
+                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    {
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                id = reader.GetInt64(0);
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    Desconectar();
+                }
+                return id;
+            }
+            public static void PreencherDataGridView(DataGridView dataGridView, DataTable dataTable, string[] headers)
+            {
+                dataGridView.DataSource = dataTable;
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    dataGridView.Columns[i].HeaderText = headers[i];
+                }
+            }
+
         }
 
 
