@@ -38,3 +38,4 @@ C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-
 C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Produtos.resources
 C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Principal.resources
 C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Encomendas.resources
+C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\WinFormsApp1\obj\Debug\net8.0-windows\WinFormsApp1.Lucro.resources

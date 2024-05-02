@@ -44,12 +44,10 @@ namespace WinFormsApp1
         private void CarregarProdutos()
         {
             //vai escrever o numero de produtos que existe
-            label_num_produtos.Text = Convert.ToString(Principal.Funcs.NumeroProdutos());
+            label_num_produtos.Text = Convert.ToString(Principal.Funcs.ContarRegistos("Produtos"));
 
             //vai preencher a datagridview e atualizar os cabeçalhos
-            DataTable dtProdutos = Principal.Funcs.ObterProdutos();
-            dataGridView_produtos.DataSource = dtProdutos;
-            Principal.Funcs.PreencherDataGridView(dataGridView_produtos, Principal.Funcs.ObterProdutos(), new[] { "ID", "Nome", "Preço", "Descrição", "Imagem", "Ativo" });
+            Principal.Funcs.PreencherDataGridView(dataGridView_produtos, Principal.Funcs.BuscarDados("Produtos"), new[] { "ID", "Nome", "Preço", "Descrição", "Imagem", "Ativo" });
             dataGridView_produtos.Columns["caminho_imagem"].Visible = false;
         }
 
@@ -59,9 +57,7 @@ namespace WinFormsApp1
             foreach (Control objeto in panel1.Controls)
             {
                 if (objeto is TextBox txt)
-                {
                     txt.Clear();
-                }
             }
             pictureBox_imagem.Image = null;
             label_msg_erro.Text = "";
@@ -79,7 +75,7 @@ namespace WinFormsApp1
             decimal preco;
             bool precoValido = decimal.TryParse(textBox_preço.Text, out preco) && preco > 0;
             string descricao = textBox_desc.Text.Trim();
-            string caminhoDestino = pictureBox_imagem.Image != null ? Path.Combine(@"..\..\..\..\img\Produtos\", $"imagem_produto_{Principal.Funcs.NumeroProdutos() + 1}.png") : "";
+            string caminhoDestino = pictureBox_imagem.Image != null ? Path.Combine(@"..\..\..\..\img\Produtos\", $"imagem_produto_{Principal.Funcs.ContarRegistos("Produtos") + 1}.png") : "";
 
             //vai verificar todas as variaveis 
             if (string.IsNullOrEmpty(nomeProduto))
@@ -176,9 +172,7 @@ namespace WinFormsApp1
                 using (var imagem = pictureBox_imagem.Image)
                 {
                     if (imagem != null)
-                    {
                         imagem.Save(caminhoDestino);
-                    }
                 }
             }
             catch (Exception)
@@ -264,18 +258,22 @@ namespace WinFormsApp1
                 textBox_nome_produto.Text = row.Cells["nome_produto"].Value.ToString();
                 textBox_preço.Text = row.Cells["preco"].Value.ToString().Split(' ')[0];
                 textBox_desc.Text = row.Cells["desc"].Value.ToString();
-
-                string? caminhoImagem = row.Cells["caminho_imagem"].Value.ToString();
-                if (!string.IsNullOrEmpty(caminhoImagem))
+                try
                 {
-                    pictureBox_imagem.Image = Image.FromFile(caminhoImagem);
+                    string? caminhoImagem = row.Cells["caminho_imagem"].Value.ToString();
+                    if (!string.IsNullOrEmpty(caminhoImagem))
+                    {
+                        pictureBox_imagem.Image = Image.FromFile(caminhoImagem);
+                        label_msg_erro.Text = "";
+                    }
+                    else
+                        pictureBox_imagem.Image = null;
                 }
-                else
-                {
+                catch {
                     pictureBox_imagem.Image = null;
+                    label_msg_erro.Text = "Imagem não encontrada";
                 }
             }
-            label_msg_erro.Text = "";
         }
 
         private void pictureBox_icon_Click(object sender, EventArgs e)
@@ -289,9 +287,7 @@ namespace WinFormsApp1
             //função para limpar 
             DialogResult result = MessageBox.Show("Deseja limpar todas as Entrys?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
-            {
                 Produtos_Load(sender, e);
-            }
         }
 
         private void button_add_imagem_Click(object sender, EventArgs e)
@@ -303,9 +299,7 @@ namespace WinFormsApp1
                 openFileDialog.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Todos os Arquivos|*.*";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
                     pictureBox_imagem.Image = Image.FromFile(openFileDialog.FileName);
-                }
             }
             catch (Exception)
             {
@@ -321,31 +315,23 @@ namespace WinFormsApp1
             Color alterar = Color.FromArgb(253, 156, 58);
 
             if (corDataGrid.Equals(adicionar))
-            {
                 AdicionarBD(sender, e);
-            }
             else if (corDataGrid.Equals(alterar))
-            {
                 AlterarBD(sender, e);
-            }
         }
 
         private void textBox_nome_produto_KeyPress(object sender, KeyPressEventArgs e)
         {
             //nao deixa escrever caracters que eu nao quero
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
-            {
                 e.Handled = true;
-            }
         }
 
         private void textBox_preço_KeyPress(object sender, KeyPressEventArgs e)
         {
             //nao deixa escrever caracters que eu nao quero
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && !char.IsControl(e.KeyChar))
-            {
                 e.Handled = true;
-            }
         }
 
         private void dataGridView_produtos_MouseDown(object sender, MouseEventArgs e)

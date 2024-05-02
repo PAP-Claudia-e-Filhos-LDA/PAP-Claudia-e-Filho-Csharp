@@ -23,11 +23,11 @@ namespace WinFormsApp1
         private void Clientes_Load(object sender, EventArgs e)
         {
             //vai preencher a datagridview
-            Principal.Funcs.PreencherDataGridView(dataGridView_clientes, Principal.Funcs.ObterClientes(),new[] { "ID", "Username", "Nome", "Contacto", "Email" });
-            Principal.Funcs.PreencherDataGridView(dataGridView_melhores_clientes, Principal.Funcs.ObterMelhoresClientes(),new[] { "ID", "Nome", "Total Encomendas" });
+            Principal.Funcs.PreencherDataGridView(dataGridView_clientes, Principal.Funcs.BuscarDados("Clientes"),new[] { "ID", "Username", "Nome", "Contacto", "Email" });
+            Principal.Funcs.PreencherDataGridView(dataGridView_melhores_clientes, Principal.Funcs.BuscarDados("Melhores Clientes"),new[] { "ID", "Nome", "Total Encomendas" });
 
             //label com numeros clientes
-            label_num_clientes.Text = Convert.ToString(Principal.Funcs.NumeroClientes());
+            label_num_clientes.Text = Convert.ToString(Principal.Funcs.ContarRegistos("Clientes"));
         }
         private void pictureBox_aviso_clientes_Click(object sender, EventArgs e)
         {

@@ -49,6 +49,8 @@
             label1 = new Label();
             label2 = new Label();
             label_msg_erro = new Label();
+            panel_encomendas = new Panel();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox_aviso_encomendas).BeginInit();
             panel_grafico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_clientes).BeginInit();
@@ -103,7 +105,7 @@
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(23, 25, 31);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.ForeColor = SystemColors.Control;
             dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(253, 156, 58);
             dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
@@ -198,7 +200,7 @@
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = Color.FromArgb(23, 25, 31);
             dataGridViewCellStyle4.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.ForeColor = SystemColors.Control;
             dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(253, 156, 58);
             dataGridViewCellStyle4.SelectionForeColor = Color.Black;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
@@ -296,12 +298,35 @@
             label_msg_erro.Size = new Size(0, 15);
             label_msg_erro.TabIndex = 45;
             // 
+            // panel_encomendas
+            // 
+            panel_encomendas.BackColor = Color.FromArgb(23, 25, 31);
+            panel_encomendas.Cursor = Cursors.Hand;
+            panel_encomendas.Location = new Point(575, 172);
+            panel_encomendas.Name = "panel_encomendas";
+            panel_encomendas.Size = new Size(388, 589);
+            panel_encomendas.TabIndex = 38;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.Transparent;
+            label3.Location = new Point(677, 148);
+            label3.Name = "label3";
+            label3.Size = new Size(136, 21);
+            label3.TabIndex = 46;
+            label3.Text = "Ver Encomendas";
+            // 
             // Encomendas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 49, 51);
             ClientSize = new Size(991, 791);
+            Controls.Add(label3);
+            Controls.Add(panel_encomendas);
             Controls.Add(label_msg_erro);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -316,6 +341,7 @@
             Controls.Add(panel_grafico);
             Controls.Add(label_linha);
             Controls.Add(label_encomendas);
+            ForeColor = SystemColors.Control;
             Name = "Encomendas";
             Text = "Form1";
             Load += Encomendas_Load;
@@ -347,5 +373,7 @@
         private Label label1;
         private Label label2;
         private Label label_msg_erro;
+        private Panel panel_encomendas;
+        private Label label3;
     }
 }

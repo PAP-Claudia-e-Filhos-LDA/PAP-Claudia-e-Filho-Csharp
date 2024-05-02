@@ -41,9 +41,9 @@ namespace WinFormsApp1
         private void AtualizarValoresDashboard()
         {
             //vai escrever os valores dos panels
-            label_num_clientes.Text = Convert.ToString(Principal.Funcs.NumeroClientes());
-            label_num_produtos.Text = Convert.ToString(Principal.Funcs.NumeroProdutos());
-            label_num_encomendas.Text = Convert.ToString(Principal.Funcs.NumeroEncomendas());
+            label_num_clientes.Text = Convert.ToString(Principal.Funcs.ContarRegistos("Clientes"));
+            label_num_produtos.Text = Convert.ToString(Principal.Funcs.ContarRegistos("Produtos"));
+            label_num_encomendas.Text = Convert.ToString(Principal.Funcs.ContarRegistos("Encomendas"));
         }
 
         private void panel_Click(object sender, EventArgs e)

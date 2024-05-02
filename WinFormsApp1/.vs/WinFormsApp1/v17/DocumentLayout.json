@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\encomendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:encomendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\produtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:produtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\encomendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:encomendas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,19 +22,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Produtos.cs",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Produtos.cs",
-              "RelativeDocumentMoniker": "Produtos.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Produtos.cs",
-              "RelativeToolTip": "Produtos.cs",
-              "ViewState": "AQIAAL0AAAAAAAAAAAAowNoAAAAMAAAA",
+              "DocumentIndex": 0,
+              "Title": "Lucro.cs",
+              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs",
+              "RelativeDocumentMoniker": "Lucro.cs",
+              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs",
+              "RelativeToolTip": "Lucro.cs",
+              "ViewState": "AQIAAFQAAAAAAAAAAAAuwHcAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T15:49:02.343Z",
+              "WhenOpened": "2024-04-30T12:57:21.364Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -49,35 +46,20 @@
               "RelativeDocumentMoniker": "Principal.cs",
               "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Principal.cs",
               "RelativeToolTip": "Principal.cs",
-              "ViewState": "AQIAADsBAAAAAAAAAAAgwGABAAAfAAAA",
+              "ViewState": "AQIAABcBAAAAAAAAAAAAwDMBAAAgAQAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T15:19:12.746Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-30T11:24:16.01Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Encomendas.cs",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Encomendas.cs",
-              "RelativeDocumentMoniker": "Encomendas.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Encomendas.cs",
-              "RelativeToolTip": "Encomendas.cs",
-              "ViewState": "AQIAAI4AAAAAAAAAAAAAwK8AAAApAAAA",
+              "DocumentIndex": 2,
+              "Title": "Lucro.cs [Projeto]",
+              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs",
+              "RelativeDocumentMoniker": "Lucro.cs",
+              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs [Projeto]",
+              "RelativeToolTip": "Lucro.cs [Projeto]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T10:00:32.376Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Encomendas.cs [Projeto]",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Encomendas.cs",
-              "RelativeDocumentMoniker": "Encomendas.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Encomendas.cs [Projeto]",
-              "RelativeToolTip": "Encomendas.cs [Projeto]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T10:00:30.767Z",
-              "EditorCaption": " [Projeto]"
+              "WhenOpened": "2024-04-30T12:59:22.263Z"
             }
           ]
         }

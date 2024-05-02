@@ -6,45 +6,40 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 using System.Drawing.Drawing2D;
+using System.Data.SqlClient;
+using System.Globalization;
 namespace WinFormsApp1
 {
-    //nao otimizado
+    // otimizado
     public partial class Principal : Form
     {
         //classe com as Funções
         public static class Funcs
         {
             //classe para as funções
-
             //variavel para a conexão
             private static SQLiteConnection? conexao;
-
             public static SQLiteConnection Conectar()
             { //liga a base de dados
                 //depois mudar para caminho absuluto
                 string caminho = "Data Source=\"..\\..\\..\\..\\bd\\Rissois.db\";Version=3;";
                 conexao = new SQLiteConnection(caminho);
                 if (conexao.State == ConnectionState.Closed)
-                {
                     conexao.Open();
-                }
                 return conexao;
             }
             public static void Desconectar()
             {//desliga a base de dados
                 if (conexao != null && conexao.State == ConnectionState.Open)
-                {
                     conexao.Close();
-                }
             }
-
-            public static long NumeroClientes()
+            public static long ContarRegistos(string tabela)
             {//calcula no numero de clientes
                 SQLiteConnection conexao = Conectar();
                 long num = 0;
                 try
                 {
-                    string query = "SELECT COUNT(*) FROM Clientes;";
+                    string query = "SELECT COUNT(*) FROM "+tabela+";";
                     using (SQLiteCommand command = new SQLiteCommand(query, conexao))
                     {
                         using (SQLiteDataReader reader = command.ExecuteReader())
@@ -62,137 +57,49 @@ namespace WinFormsApp1
                 }
                 return num;
             }
-            public static long NumeroProdutos()
-            {//calcula no numero de Produtos
-                SQLiteConnection conexao = Conectar();
-                long num = 0;
-                try
-                {
-                    string query = "SELECT COUNT(*) FROM Produtos;";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
-                    {
-                        using (SQLiteDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                num = reader.GetInt64(0);
-                            }
-                        }
-                    }
-                }
-                finally
-                {
-                    Desconectar();
-                }
-                return num;
-            }
-            public static long NumeroEncomendas()
-            {//calcula no numero de Encomendas
-                SQLiteConnection conexao = Conectar();
-                long num = 0;
-                try
-                {
-                    string query = "SELECT COUNT(*) FROM Encomendas;";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
-                    {
-                        using (SQLiteDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                num = reader.GetInt64(0);
-                            }
-                        }
-                    }
-                }
-                finally
-                {
-                    Desconectar();
-                }
-                return num;
-            }
-            public static DataTable ObterClientes()
+            public static DataTable BuscarDados(string tabela)
             {//vai buscar os dados dos clientes á base de dados e mete na DatagridView
+                string query = "";
                 SQLiteConnection conexao = Conectar();
-                DataTable dtClientes = new DataTable();
+                DataTable DadosTabela = new DataTable();
+                switch (tabela)
+                {
+                    case "Clientes":
+                        query = "SELECT id_clientes,username,nome_cliente,contacto,email FROM Clientes;";
+                        break;
+                    case "Melhores Clientes":
+                        query = "SELECT C.id_clientes, C.nome_cliente, COUNT(E.id_Encomendas) AS total_encomendas FROM Clientes C LEFT JOIN Encomendas E ON C.id_clientes = E.id_clientes GROUP BY C.id_clientes, C.username, C.nome_cliente ORDER BY total_encomendas DESC;\"";
+                        break;
+                    case "Produtos":
+                        query = "SELECT id_produto, nome_produto, printf('%.2f €', preco) as preco, [desc], caminho_imagem, CASE WHEN ativo = 1 THEN 'Sim' ELSE 'Não' END AS ativo_status FROM Produtos;";
+                        break;
+                }
                 try
                 {
-                    string query = "SELECT id_clientes,username,nome_cliente,contacto,email FROM Clientes;";
                     using (SQLiteCommand command = new SQLiteCommand(query, conexao))
                     {
                         SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-                        adapter.Fill(dtClientes);
+                        adapter.Fill(DadosTabela);
                     }
                 }
                 finally
                 {
                     Desconectar();
                 }
-
-                return dtClientes;
-
+                return DadosTabela;
             }
-            public static DataTable ObterMelhoresClientes()
-            {//vai buscar os dados dos clientes da base de dados ordenando por mais encomendas
-                SQLiteConnection conexao = Conectar();
-                DataTable dtClientes = new DataTable();
-                try
-                {
-                    string query = "SELECT C.id_clientes, C.nome_cliente, COUNT(E.id_Encomendas) AS total_encomendas FROM Clientes C LEFT JOIN Encomendas E ON C.id_clientes = E.id_clientes GROUP BY C.id_clientes, C.username, C.nome_cliente ORDER BY total_encomendas DESC;\"";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
-                    {
-                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-                        adapter.Fill(dtClientes);
-                    }
-                }
-                finally
-                {
-                    Desconectar();
-                }
-
-                return dtClientes;
-
-            }
-            public static DataTable ObterProdutos()
-            {//vai buscar os dados dos produtos á base de dados e mete na DatagridView
-                SQLiteConnection conexao = Conectar();
-                DataTable dtProdutos = new DataTable();
-                try
-                {
-                string query = "SELECT id_produto, nome_produto, printf('%.2f €', preco) as preco, [desc], caminho_imagem, CASE WHEN ativo = 1 THEN 'Sim' ELSE 'Não' END AS ativo_status FROM Produtos;";
-                using (SQLiteCommand command = new SQLiteCommand(query, conexao))
-                    {
-                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-                        adapter.Fill(dtProdutos);
-                    }
-                }
-                finally
-                {
-                    Desconectar();
-                }
-
-                return dtProdutos;
-
-            }
-            public static void ArredondarBordas(Panel panel, int raio)
-            {//função de arredondar as bordas 
-                GraphicsPath path = new GraphicsPath();
-                path.AddArc(panel.ClientRectangle.Width - raio, 0, raio, raio, 270, 90);
-                path.AddArc(panel.ClientRectangle.Width - raio, panel.ClientRectangle.Height - raio, raio, raio, 0, 90);
-                path.AddArc(0, panel.ClientRectangle.Height - raio, raio, raio, 90, 90);
-                path.AddArc(0, 0, raio, raio, 180, 90);
-                panel.Region = new Region(path);
-            }
-            public static DataTable NomeCLientes()
+            public static DataTable BuscarNomes(string tabela)
             {//vai buscar os nomes dos clientes á base de dados e mete na DatagridView
+                string campo = char.ToLowerInvariant(tabela[0]) + tabela.Substring(1, tabela.Length - 2);
                 SQLiteConnection conexao = Conectar();
-                DataTable dtClientes = new DataTable();
+                DataTable DadosTabela = new DataTable();
                 try
                 {
-                    string query = "Select nome_cliente from Clientes";
+                    string query = "Select nome_"+campo+" from "+tabela;
                     using (SQLiteCommand command = new SQLiteCommand(query, conexao))
                     {
                         SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-                        adapter.Fill(dtClientes);
+                        adapter.Fill(DadosTabela);
                     }
                 }
                 finally
@@ -200,37 +107,20 @@ namespace WinFormsApp1
                     Desconectar();
                 }
 
-                return dtClientes;
+                return DadosTabela;
 
             }
-            public static DataTable NomeProdutos()
-            {//vai buscar os nomes dos clientes á base de dados e mete na DatagridView
-                SQLiteConnection conexao = Conectar();
-                DataTable dtProdutos = new DataTable();
-                try
-                {
-                    string query = "Select nome_produto from Produtos";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
-                    {
-                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-                        adapter.Fill(dtProdutos);
-                    }
-                }
-                finally
-                {
-                    Desconectar();
-                }
-
-                return dtProdutos;
-
-            }
-            public static long IdCliente(string nomeCliente)
-            {//vai buscar o id_cliente pelo nome do mesmo
+            public static long BuscarID(string nome,string tabela)
+            {//vai buscar o id pelo nome do mesmo
+                string campo = char.ToLowerInvariant(tabela[0]) + tabela.Substring(1, tabela.Length - 2);
+                string idclientes = campo;
+                if (campo == "cliente")
+                    idclientes = campo+"s";
                 SQLiteConnection conexao = Conectar();
                 long id = 0;
                 try
                 {
-                    string query = "SELECT id_clientes from Clientes where nome_cliente = '"+nomeCliente+"'";
+                    string query = "SELECT id_"+ idclientes + " from "+tabela+" where nome_"+campo+" = '" + nome + "'";
                     using (SQLiteCommand command = new SQLiteCommand(query, conexao))
                     {
                         using (SQLiteDataReader reader = command.ExecuteReader())
@@ -256,43 +146,187 @@ namespace WinFormsApp1
                     dataGridView.Columns[i].HeaderText = headers[i];
                 }
             }
-            public static long IdProduto(string nomeProduto)
-            {//vai buscar o id_produto pelo nome do mesmo
+            public static void ArredondarBordas(Panel panel, int raio)
+            {//função de arredondar as bordas 
+                GraphicsPath path = new GraphicsPath();
+                path.AddArc(panel.ClientRectangle.Width - raio, 0, raio, raio, 270, 90);
+                path.AddArc(panel.ClientRectangle.Width - raio, panel.ClientRectangle.Height - raio, raio, raio, 0, 90);
+                path.AddArc(0, panel.ClientRectangle.Height - raio, raio, raio, 90, 90);
+                path.AddArc(0, 0, raio, raio, 180, 90);
+                panel.Region = new Region(path);
+            }
+            public static void MostrarEncomendas(Panel panel_encomendas)
+            {
+                panel_encomendas.Controls.Clear();
+
                 SQLiteConnection conexao = Conectar();
-                long id = 0;
-                try
+
+                //vai apenas buscar os dados da encomenda sem os produtos
+                using (SQLiteCommand command = new SQLiteCommand("SELECT Encomendas.id_Encomendas AS 'ID Encomenda', Clientes.nome_cliente AS 'Nome do Cliente', Encomendas.data_encomenda AS 'Data', CASE WHEN Encomendas.metedo_pagamento = 0 THEN 'Pagamento em Mãos' ELSE 'MBway' END AS 'Método de Pagamento', CASE WHEN Encomendas.metedo_entrega = 0 THEN 'Pickup' ELSE 'Entrega ao domicílio' END AS 'Método de Entrega', Encomendas.mensagem FROM Encomendas JOIN Clientes ON Encomendas.id_clientes = Clientes.id_clientes ORDER BY Encomendas.id_Encomendas ;", conexao))
                 {
-                    string query = "SELECT id_produto from Produtos where nome_produto = '" + nomeProduto + "'";
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        int linhaEncomenda = 0;
+
+                        while (reader.Read())
+                        { //vai começar a tratar dos dados 
+
+                            //esta a por tudo em vartiaveis
+                            int idEncomenda = Convert.ToInt32(reader["ID Encomenda"]);
+                            string? nomeCliente = reader["Nome do Cliente"].ToString();
+                            string ?dataString = reader["Data"].ToString(); 
+                            dataString = dataString.Substring(0, dataString.Length - 8);
+                            string? metodoPagamento = reader["Método de Pagamento"].ToString();
+                            string? metodoEntrega = reader["Método de Entrega"].ToString();
+                            string? mensagem = reader["mensagem"].ToString();
+
+                            //vai juntar tudo numa string
+                            string encomendaInfo = "Encomenda: " + idEncomenda + "\nCliente: " + nomeCliente + "\nData: " + dataString + "\nMétodo de Pagamento: " + metodoPagamento + "\nMétodo de Entrega: " + metodoEntrega + "\nMensagem: " + (string.IsNullOrEmpty(mensagem) ? "[Nada]" : mensagem) + "\nProdutos:\n";
+
+                            //vai juntar os preços de todo e vai calcular o preço da encomenda
+                            double totalEncomenda = 0;
+
+                            //pelo id da encomenda que esta atras vai ver todos os produtos e as suas caracteristicas 
+                            using (SQLiteCommand productsCommand = new SQLiteCommand("SELECT Produtos.nome_produto, Linha_de_Encomenda.quantidade, CASE WHEN Produtos.nome_produto LIKE '%Rissol%' OR Produtos.nome_produto LIKE '%Rissois%' OR Produtos.nome_produto LIKE '%Croquete%' OR Produtos.nome_produto LIKE '%Trouxa%' THEN Linha_de_Encomenda.congelados ELSE '' END AS congelados, Produtos.preco FROM Linha_de_Encomenda JOIN Produtos ON Linha_de_Encomenda.Produtos_id_produto = Produtos.id_produto WHERE Linha_de_Encomenda.Encomendas_id_Encomendas = @IdEncomenda;", conexao))
+                            {
+                                productsCommand.Parameters.AddWithValue("@IdEncomenda", idEncomenda);
+                                using (SQLiteDataReader productsReader = productsCommand.ExecuteReader())
+                                {
+                                    while (productsReader.Read())
+                                    {
+                                        string? produto = productsReader["nome_produto"].ToString();
+                                        int quantidade = Convert.ToInt32(productsReader["quantidade"]);
+                                        string? congelados = productsReader["congelados"].ToString();
+                                        double preco = Convert.ToDouble(productsReader["preco"]);
+
+                                        totalEncomenda += quantidade * preco;
+
+                                        string tipoCongelamento = congelados == "0" ? "Congelado" : "Fritos";
+                                        string congeladosStr = string.IsNullOrEmpty(congelados) ? "" : (", " + tipoCongelamento);
+                                        string unidadeMedida = produto.Contains("Rissol") || produto.Contains("Rissois") || produto.Contains("Croquete") || produto.Contains("Trouxa") ? "duzias" : "unidades";
+
+                                        encomendaInfo += "- " + produto + " (" + quantidade + " " + unidadeMedida + congeladosStr + ", Preço: " + preco.ToString("F2") + "€)\n";
+
+                                    }
+                                }
+                            }
+                            encomendaInfo += "Total da Encomenda: " + totalEncomenda.ToString("F2") + "€\n\n";
+
+
+                            Label encomendaLabel = new Label();
+                            encomendaLabel.Text = encomendaInfo;
+                            encomendaLabel.Font = new Font("", 10);
+                            encomendaLabel.ForeColor = Color.White;
+                            encomendaLabel.BackColor = ColorTranslator.FromHtml("#17191F");
+                            encomendaLabel.TextAlign = ContentAlignment.MiddleLeft;
+                            encomendaLabel.AutoSize = true;
+                            encomendaLabel.Dock = DockStyle.Top;
+                            panel_encomendas.Controls.Add(encomendaLabel);
+                            linhaEncomenda++;
+                        }
+                    }
+                }
+                Desconectar();
+            }
+            public static List<string> AnosServico()
+            {
+                List<string> anos = new List<string>();
+
+                using (SQLiteConnection conexao = Conectar())
+                {
+                    string query = "SELECT DISTINCT strftime('%Y', data_encomenda) FROM Encomendas";
                     using (SQLiteCommand command = new SQLiteCommand(query, conexao))
                     {
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                id = reader.GetInt64(0);
+                                anos.Add(reader.GetString(0)); // Adiciona o ano à lista de anos
                             }
                         }
+                    }
+                }
+
+                return anos;
+            }
+            public static List<string> MesesTotal(bool fazer, string ano)
+            {
+                List<string> dados = new List<string>();
+
+                using (SQLiteConnection conexao = Conectar())
+                {
+                    string query = "SELECT strftime('%m', data_encomenda) AS mes, SUM(preco_produto * quantidade) AS total_lucro FROM Encomendas JOIN Linha_de_Encomenda ON Encomendas.id_Encomendas = Linha_de_Encomenda.Encomendas_id_Encomendas JOIN Produtos ON Linha_de_Encomenda.Produtos_id_produto = Produtos.id_produto WHERE strftime('%Y', data_encomenda) = @ano GROUP BY mes ORDER BY mes;";
+                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    {
+                        command.Parameters.AddWithValue("@ano", ano);
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                if(fazer)
+                                    dados.Add(reader.GetString(0));
+                                else
+                                    dados.Add(reader.GetDecimal(1).ToString());
+                            }
+                        }
+                    }
+                }
+                return dados;
+            }
+
+
+
+
+
+
+
+            public static DataTable Lucros(string ano, string mes,string fazer) //tenho o mes 
+            {//vai buscar os nomes dos clientes á base de dados e mete na DatagridView
+                string query = "";
+                SQLiteConnection conexao = Conectar();
+                DataTable DadosTabela = new DataTable();
+                try
+                {
+                    switch (fazer)
+                    {
+                        case "Melhores Clientes,Ano":
+                                query = @" SELECT c.nome_cliente, COUNT(e.id_Encomendas) AS total_encomendas FROM Clientes c JOIN Encomendas e ON c.id_clientes = e.id_clientes WHERE strftime('%Y', e.data_encomenda) = @ano GROUP BY c.id_clientes ORDER BY total_encomendas DESC; ";
+                            break;
+                        case "Produtos mais Comprados,Ano":
+                                 query = "SELECT p.nome_produto, SUM(le.quantidade) AS total_quantidade FROM Produtos p JOIN Linha_de_Encomenda le ON p.id_produto = le.Produtos_id_produto JOIN Encomendas e ON le.Encomendas_id_Encomendas = e.id_Encomendas WHERE strftime('%Y', e.data_encomenda) = @ano GROUP BY p.id_produto ORDER BY total_quantidade DESC;";
+                            break;
+                        case "Total Faturado,Ano":
+                                 query = "SELECT SUM(le.quantidade * le.preco_produto) || ' €' AS lucro_total FROM Linha_de_Encomenda le JOIN Encomendas e ON le.Encomendas_id_Encomendas = e.id_Encomendas WHERE strftime('%Y', e.data_encomenda) = @ano;";
+                            break;
+                        case "Melhores Clientes,Mes":
+                            query = @" SELECT c.nome_cliente, COUNT(e.id_Encomendas) AS total_encomendas FROM Clientes c JOIN Encomendas e ON c.id_clientes = e.id_clientes WHERE strftime('%Y', e.data_encomenda) = @ano AND strftime('%m', e.data_encomenda) = @mes GROUP BY c.id_clientes ORDER BY total_encomendas DESC;";
+                            break;
+                        case "Produtos mais Comprados,Mes":
+                            query = "SELECT p.nome_produto, SUM(le.quantidade) AS total_quantidade FROM Produtos p JOIN Linha_de_Encomenda le ON p.id_produto = le.Produtos_id_produto JOIN Encomendas e ON le.Encomendas_id_Encomendas = e.id_Encomendas WHERE strftime('%Y', e.data_encomenda) = @ano AND strftime('%m', e.data_encomenda) = @mes GROUP BY p.id_produto ORDER BY total_quantidade DESC;\r\n";
+                            break;
+                        case "Total Faturado,Mes":
+                            query = "SELECT SUM(le.quantidade * le.preco_produto) || ' €' AS lucro_total FROM Linha_de_Encomenda le JOIN Encomendas e ON le.Encomendas_id_Encomendas = e.id_Encomendas WHERE strftime('%Y', e.data_encomenda) = @ano AND strftime('%m', e.data_encomenda) = @mes;\r\n";
+                            break;
+                    }
+                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    {
+                        command.Parameters.AddWithValue("@ano", ano);
+                        command.Parameters.AddWithValue("@mes", mes);
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+                        adapter.Fill(DadosTabela);
                     }
                 }
                 finally
                 {
                     Desconectar();
                 }
-                return id;
+                return DadosTabela;
             }
-
         }
-
 
         //coisa para fazer curvas redondas
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn(
-            int nLeftRect,
-             int nTopRect,
-             int nRightRect,
-             int nBottomRect,
-             int nWidthEllipse,
-             int wHeightEllipse);
+        private static extern IntPtr CreateRoundRectRgn(int nLeftRect,int nTopRect,int nRightRect,int nBottomRect,int nWidthEllipse,int wHeightEllipse);
         public Principal()
         {
             InitializeComponent();
@@ -313,9 +347,7 @@ namespace WinFormsApp1
             foreach (Control objeto in panel_sidebar.Controls)
             { //isto vai tirar as cores de todos botoes
                 if (objeto is Button btns)
-                {
                     btns.BackColor = Color.FromArgb(23, 25, 31);
-                }
             }
             Button? clickedButton = sender as Button;
             if (clickedButton != null)
@@ -331,62 +363,62 @@ namespace WinFormsApp1
         {
             //quando eu carrego em um botao , panel de outro form vai fazer esta função 
             SetNavigation(sender);
-            Button? btn = sender as Button;
-            Panel? pln = sender as Panel;
-            PictureBox? img = sender as PictureBox;
-            if (btn != null) { 
-                switch (btn.Name)
-                {
-                    case "button_dashboard":
-                        MostrarFormulario(new Dashboard(this));
-                        break;
-                    case "button_clientes":
-                        MostrarFormulario(new Clientes());
-                        break;
-                    case "button_produtos":
-                        MostrarFormulario(new Produtos());
-                        break;
-                    case "button_encomendas":
-                        MostrarFormulario(new Encomendas(this));
-                        break;
-                    default:
-                        MessageBox.Show("Botão sem função");
-                        break;
-                }
-            }
-
-            if (pln != null)
+            switch (sender)
             {
-                switch (pln.Name)
-                {
-                    case "panel_clientes":
-                        SetNavigation(button_clientes);
-                        MostrarFormulario(new Clientes());
-                        break;
-                    case "panel_produtos":
-                        SetNavigation(button_produtos);
-                        MostrarFormulario(new Produtos());
-                        break;
-                    case "panel_encomendas":
-                        SetNavigation(button_encomendas);
-                        MostrarFormulario(new Encomendas(this));
-                        break;
-                }
+                case Button btn:
+                    switch (btn.Name)
+                    {
+                        case "button_dashboard":
+                            MostrarFormulario(new Dashboard(this));
+                            break;
+                        case "button_clientes":
+                            MostrarFormulario(new Clientes());
+                            break;
+                        case "button_produtos":
+                            MostrarFormulario(new Produtos());
+                            break;
+                        case "button_encomendas":
+                            MostrarFormulario(new Encomendas(this));
+                            break;
+                        case "button_lucro":
+                            MostrarFormulario(new Lucro());
+                            break;
+                        default:
+                            MessageBox.Show("Botão sem função");
+                            break;
+                    }
+                    break;
+                case (Panel pln):
+                    switch (pln.Name)
+                    {
+                        case "panel_clientes":
+                            SetNavigation(button_clientes);
+                            MostrarFormulario(new Clientes());
+                            break;
+                        case "panel_produtos":
+                            SetNavigation(button_produtos);
+                            MostrarFormulario(new Produtos());
+                            break;
+                        case "panel_encomendas":
+                            SetNavigation(button_encomendas);
+                            MostrarFormulario(new Encomendas(this));
+                            break;
+                    }
+                    break;
+                case (PictureBox img):
+                    switch (img.Name)
+                    {
+                        case "pictureBox_icon_limpar":
+                            SetNavigation(button_produtos);
+                            MostrarFormulario(new Produtos());
+                            break;
+                        case "pictureBox_limpar_encomendas":
+                            SetNavigation(button_encomendas);
+                            MostrarFormulario(new Encomendas(this));
+                            break;
+                    }
+                    break;
 
-            }
-            if (img != null)
-            {
-                switch (img.Name)
-                {
-                    case "pictureBox_icon_limpar":
-                        SetNavigation(button_produtos);
-                        MostrarFormulario(new Produtos());
-                        break;
-                    case "pictureBox_limpar_encomendas":
-                        SetNavigation(button_encomendas);
-                        MostrarFormulario(new Encomendas(this));
-                        break;
-                }
             }
         }
 
