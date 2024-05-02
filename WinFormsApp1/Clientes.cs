@@ -12,6 +12,9 @@ namespace WinFormsApp1
             //vai iniciar as furnções que vão consfigurar as datagrid view
             ConfigurarDataGridView(dataGridView_clientes);
             ConfigurarDataGridView(dataGridView_melhores_clientes);
+            Principal.Funcs.ArredondarBordas(panel_grafico, 25);
+            Principal.Funcs.ArredondarBordas(panel_clientes, 50);
+            Principal.Funcs.ArredondarBordas(panel1, 30);
         }
         private void ConfigurarDataGridView(DataGridView dataGridView)
         {

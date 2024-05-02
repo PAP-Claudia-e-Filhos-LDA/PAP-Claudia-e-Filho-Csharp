@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\mensagens.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:mensagens.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\mensagens.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:mensagens.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:lucro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,44 +22,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Lucro.cs",
               "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs",
               "RelativeDocumentMoniker": "Lucro.cs",
               "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs",
               "RelativeToolTip": "Lucro.cs",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAuwHcAAAAdAAAA",
+              "ViewState": "AQIAAC0AAAAAAAAAAAA5wI0AAAC3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T12:57:21.364Z",
+              "WhenOpened": "2024-05-02T15:51:01.95Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Principal.cs",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Principal.cs",
-              "RelativeDocumentMoniker": "Principal.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Principal.cs",
-              "RelativeToolTip": "Principal.cs",
-              "ViewState": "AQIAABcBAAAAAAAAAAAAwDMBAAAgAQAA",
+              "DocumentIndex": 0,
+              "Title": "Mensagens.cs",
+              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Mensagens.cs",
+              "RelativeDocumentMoniker": "Mensagens.cs",
+              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Mensagens.cs",
+              "RelativeToolTip": "Mensagens.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAuwCIAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T11:24:16.01Z"
+              "WhenOpened": "2024-05-02T08:07:16.999Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Lucro.cs [Projeto]",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs",
-              "RelativeDocumentMoniker": "Lucro.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Lucro.cs [Projeto]",
-              "RelativeToolTip": "Lucro.cs [Projeto]",
+              "DocumentIndex": 1,
+              "Title": "Mensagens.cs [Projeto]",
+              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Mensagens.cs",
+              "RelativeDocumentMoniker": "Mensagens.cs",
+              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Mensagens.cs [Projeto]",
+              "RelativeToolTip": "Mensagens.cs [Projeto]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T12:59:22.263Z"
+              "WhenOpened": "2024-05-02T10:11:35.146Z",
+              "EditorCaption": " [Projeto]"
             }
           ]
         }

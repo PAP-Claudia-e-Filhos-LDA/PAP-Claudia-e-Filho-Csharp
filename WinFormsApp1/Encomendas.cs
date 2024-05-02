@@ -35,14 +35,20 @@ namespace WinFormsApp1
             panel_encomendas.HorizontalScroll.Visible = false;
             panel_encomendas.HorizontalScroll.Maximum = 0;
             panel_encomendas.AutoScroll = true;
-        }
 
+            foreach (Control objeto in Controls)
+            {
+                if (objeto is Panel pln)
+                {
+                    Principal.Funcs.ArredondarBordas(pln, 20);
+                }
+            }
+        }
         private void pictureBox_aviso_encomendas_Click(object sender, EventArgs e)
         {
             //mensagem de aviso
             MessageBox.Show("Esta é a página das encomendas, aqui podes fazer e ver todas as encomendas.\n\nComo fazer uma encomenda:\n\n1)Selecione um cliente;\n2)Depois para adicionar um produto só tem de mudar a quantidade dele para algo maior que 0;\n3)Se quiser esse produto frito ou congelado é so marcar a caixa ao lado desse mesmo produto (só rissois seram fritos e congelados);\n4)Depois é confirmar a encomenda e ela vai aparecer na janela ao lado.", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-
         private void TabelaClientes()
         {
             //Vai preencher, tornar apenas de leitura e aumentar a altura das cells
@@ -51,7 +57,6 @@ namespace WinFormsApp1
             dataGridView_clientes.RowTemplate.Height = 40;
             dataGridView_clientes.Columns["nome_cliente"].HeaderText = "Cliente";
         }
-
         private void TabelaProdutos(string nome, Type Colunas)
         {
             //isto é para a tabela dos produtos
@@ -91,7 +96,6 @@ namespace WinFormsApp1
             comboBox_entrega.SelectedIndex = 0;
             comboBox_pagemento.SelectedIndex = 0;
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             //vai perguntar de quer limpar as entrys
@@ -102,7 +106,7 @@ namespace WinFormsApp1
                 principal.button_Click(pictureBox_limpar_encomendas, EventArgs.Empty);
         }
         private void pictureBox1_Click(object sender, EventArgs e)
-        { //não mexer mais 
+        {
             //Variaveis
             DateTime dataAtual = DateTime.Now;
             string dataFormatada = dataAtual.ToString("yyyy-MM-dd");

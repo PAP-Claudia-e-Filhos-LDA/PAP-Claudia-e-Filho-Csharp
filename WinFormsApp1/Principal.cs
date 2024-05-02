@@ -34,7 +34,7 @@ namespace WinFormsApp1
                     conexao.Close();
             }
             public static long ContarRegistos(string tabela)
-            {//calcula no numero de clientes
+            {//calcula no numero de registos
                 SQLiteConnection conexao = Conectar();
                 long num = 0;
                 try
@@ -58,7 +58,7 @@ namespace WinFormsApp1
                 return num;
             }
             public static DataTable BuscarDados(string tabela)
-            {//vai buscar os dados dos clientes á base de dados e mete na DatagridView
+            {//vai buscar os dados á base de dados e mete na DatagridView
                 string query = "";
                 SQLiteConnection conexao = Conectar();
                 DataTable DadosTabela = new DataTable();
@@ -89,7 +89,7 @@ namespace WinFormsApp1
                 return DadosTabela;
             }
             public static DataTable BuscarNomes(string tabela)
-            {//vai buscar os nomes dos clientes á base de dados e mete na DatagridView
+            {//vai buscar os nomes á base de dados e mete na DatagridView
                 string campo = char.ToLowerInvariant(tabela[0]) + tabela.Substring(1, tabela.Length - 2);
                 SQLiteConnection conexao = Conectar();
                 DataTable DadosTabela = new DataTable();
@@ -139,7 +139,7 @@ namespace WinFormsApp1
                 return id;
             }
             public static void PreencherDataGridView(DataGridView dataGridView, DataTable dataTable, string[] headers)
-            {
+            {//vai preencher uma Datagrid expecifica , com uma certa informação e vai renomear os cabeçalhos para 
                 dataGridView.DataSource = dataTable;
                 for (int i = 0; i < headers.Length; i++)
                 {
@@ -157,6 +157,7 @@ namespace WinFormsApp1
             }
             public static void MostrarEncomendas(Panel panel_encomendas)
             {
+                //vai mostrar todas as encomendas
                 panel_encomendas.Controls.Clear();
 
                 SQLiteConnection conexao = Conectar();
@@ -174,7 +175,7 @@ namespace WinFormsApp1
                             //esta a por tudo em vartiaveis
                             int idEncomenda = Convert.ToInt32(reader["ID Encomenda"]);
                             string? nomeCliente = reader["Nome do Cliente"].ToString();
-                            string ?dataString = reader["Data"].ToString(); 
+                            string? dataString = reader["Data"].ToString(); 
                             dataString = dataString.Substring(0, dataString.Length - 8);
                             string? metodoPagamento = reader["Método de Pagamento"].ToString();
                             string? metodoEntrega = reader["Método de Entrega"].ToString();
@@ -229,7 +230,7 @@ namespace WinFormsApp1
                 Desconectar();
             }
             public static List<string> AnosServico()
-            {
+            { //vai mostrar os anos de serviço
                 List<string> anos = new List<string>();
 
                 using (SQLiteConnection conexao = Conectar())
@@ -241,7 +242,7 @@ namespace WinFormsApp1
                         {
                             while (reader.Read())
                             {
-                                anos.Add(reader.GetString(0)); // Adiciona o ano à lista de anos
+                                anos.Add(reader.GetString(0)); 
                             }
                         }
                     }
@@ -250,7 +251,7 @@ namespace WinFormsApp1
                 return anos;
             }
             public static List<string> MesesTotal(bool fazer, string ano)
-            {
+            { //vou fazer isto duas vezes , 1) para saber o numero do mes , 2)para saber o lucro desse mes
                 List<string> dados = new List<string>();
 
                 using (SQLiteConnection conexao = Conectar())
@@ -273,15 +274,8 @@ namespace WinFormsApp1
                 }
                 return dados;
             }
-
-
-
-
-
-
-
-            public static DataTable Lucros(string ano, string mes,string fazer) //tenho o mes 
-            {//vai buscar os nomes dos clientes á base de dados e mete na DatagridView
+            public static DataTable Lucros(string ano, string mes,string fazer) 
+            {//dependendo do ano do mes e do que vou fazer vai fazer querys diferntes
                 string query = "";
                 SQLiteConnection conexao = Conectar();
                 DataTable DadosTabela = new DataTable();
@@ -322,7 +316,125 @@ namespace WinFormsApp1
                 }
                 return DadosTabela;
             }
+            public static List<string> DadosMensagens(bool ano,bool mes , bool cliente, bool assunto)
+            {
+                string query = "";
+                List<string> dados = new List<string>();
+
+                using (SQLiteConnection conexao = Conectar())
+                {
+                    if(ano)
+                        query = "SELECT DISTINCT strftime('%Y', data_mensagem) FROM Mensagens_Clientes";
+                    if(mes)
+                         query = @" SELECT DISTINCT strftime('%m', data_mensagem) AS meses_diferentes FROM Mensagens_Clientes; ";
+                    if(cliente)
+                        query = @" SELECT DISTINCT(c.nome_cliente) FROM Clientes c INNER JOIN Mensagens_Clientes mc ON c.id_clientes = mc.id_cliente;";
+                    if (assunto)
+                        query = @"SELECT DISTINCT A.nome_assunto FROM Mensagens_Clientes AS MC JOIN Assuntos AS A ON MC.id_assunto = A.id_assunto JOIN Clientes AS C ON MC.id_cliente = C.id_clientes";
+
+                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    {
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                dados.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                }
+
+                return dados;
+            }
+            public static void MostrarMensagens(Panel panel_mensagens, string ano, string mes, string cliente, string assunto)
+            {
+                string query = @"SELECT MC.id_mensagem, C.nome_cliente, MC.mensagem, C.imagem_perfil, A.nome_assunto 
+                    FROM Mensagens_Clientes AS MC  
+                    JOIN Clientes AS C ON MC.id_cliente = C.id_clientes  
+                    LEFT JOIN Assuntos AS A ON MC.id_assunto = A.id_assunto";
+
+                List<string> conditions = new List<string>();
+                if (ano != null)
+                    conditions.Add("strftime('%Y', MC.data_mensagem) = @ano");
+                if (mes != null)
+                    conditions.Add("strftime('%m', MC.data_mensagem) = @mes");
+                if (cliente != null)
+                    conditions.Add("C.nome_cliente = @cliente");
+                if (assunto != null)
+                    conditions.Add("A.nome_assunto = @assunto");
+
+                if (conditions.Count > 0)
+                    query += " WHERE " + string.Join(" AND ", conditions);
+
+                // Limpa todos os controles dentro do panel_mensagens
+                panel_mensagens.Controls.Clear();
+                string mensagemInfo = "Não existem mensagens com essas configurações.";
+
+                // Conecta ao banco de dados
+                using (SQLiteConnection conexao = Conectar())
+                {
+                    // Cria um comando para executar a consulta
+                    using (var command = new SQLiteCommand(query, conexao))
+                    {
+                        if (conditions.Count > 0)
+                        {
+                            command.Parameters.AddWithValue("@ano", ano);
+                            command.Parameters.AddWithValue("@mes", mes);
+                            command.Parameters.AddWithValue("@cliente", cliente);
+                            command.Parameters.AddWithValue("@assunto", assunto);
+                        }
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                mensagemInfo = "";
+                                while (reader.Read())
+                                {
+                                    int id_mensagem = reader.GetInt32(0);
+                                    string nome_cliente = reader.GetString(1);
+                                    string mensagem = reader.GetString(2);
+                                    // string imagem_perfil = reader.IsDBNull(3) ? "" : reader.GetString(3);
+                                    string imagem_perfil = @"C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\img\icons\user.png";
+                                    string nome_assunto = reader.IsDBNull(4) ? "" : reader.GetString(4);
+
+                                    // Crie os controles para exibir a mensagem
+                                    mensagemInfo += $"Mensagem Nº: {id_mensagem}\nCliente: {nome_cliente}\nMensagem: {mensagem}\nAssunto:{nome_assunto} \n\n\n";
+
+                                    // Cria uma PictureBox para exibir a imagem de perfil
+                                    PictureBox pictureBox = new PictureBox();
+                                    pictureBox.ImageLocation = imagem_perfil; // Define a imagem de perfil
+                                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Define o modo de exibição da imagem
+                                    pictureBox.Size = new Size(75, 75); // Define o tamanho da PictureBox
+                                    pictureBox.Location = new Point(10, panel_mensagens.Controls.Count * 120); // Define a posição da PictureBox
+                                    panel_mensagens.Controls.Add(pictureBox); // Adiciona a PictureBox ao painel
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Cria uma Label para exibir as mensagens
+                Label label_mensagem = new Label();
+                label_mensagem.Text = mensagemInfo;
+                label_mensagem.Font = new Font("", 12);
+                label_mensagem.ForeColor = Color.White;
+                label_mensagem.AutoSize = true;
+                label_mensagem.Padding = new Padding(100, 0, 0, 0);
+                panel_mensagens.Controls.Add(label_mensagem);
+
+                // Atualiza a exibição
+                panel_mensagens.PerformLayout();
+            }
+
+
         }
+
+
+
+
+
+
 
         //coisa para fazer curvas redondas
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -382,6 +494,9 @@ namespace WinFormsApp1
                             break;
                         case "button_lucro":
                             MostrarFormulario(new Lucro());
+                            break;
+                        case "button_mensagens":
+                            MostrarFormulario(new Mensagens());
                             break;
                         default:
                             MessageBox.Show("Botão sem função");

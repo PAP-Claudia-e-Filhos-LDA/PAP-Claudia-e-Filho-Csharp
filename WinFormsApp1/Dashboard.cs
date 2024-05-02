@@ -12,20 +12,17 @@ namespace WinFormsApp1
             InitializeComponent();
             this.principal = principal;
         }
-
         private void pictureBox_aviso_dashboard_Click_1(object sender, EventArgs e)
         {
             //mensagem a dizer oq e 
             MessageBox.Show("Esta é a página inicial, apenas mostra o essencial. Para mais detalhes use os botões ao lado para ver as outras janelas.", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-
         private void Dashboard_Load(object sender, EventArgs e)
         {
             //vai arredondar os panels e preencher
             ArredondarBordasPanels();
             AtualizarValoresDashboard();
         }
-
         private void ArredondarBordasPanels()
         {
             //função que vai arrendondar os panels
@@ -37,7 +34,6 @@ namespace WinFormsApp1
                 }
             }
         }
-
         private void AtualizarValoresDashboard()
         {
             //vai escrever os valores dos panels
@@ -45,7 +41,6 @@ namespace WinFormsApp1
             label_num_produtos.Text = Convert.ToString(Principal.Funcs.ContarRegistos("Produtos"));
             label_num_encomendas.Text = Convert.ToString(Principal.Funcs.ContarRegistos("Encomendas"));
         }
-
         private void panel_Click(object sender, EventArgs e)
         {
             //função que vai mudar a cor do que esta selecionado
