@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             pictureBox_aviso_dashboard = new PictureBox();
-            panel_grafico = new Panel();
             panel_encomendas = new Panel();
             label_linha_encomendas = new Label();
             label_num_encomendas = new Label();
@@ -48,6 +49,7 @@
             label_dashboard_clientes = new Label();
             label_linha_dashboard = new Label();
             label_dashboard = new Label();
+            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)pictureBox_aviso_dashboard).BeginInit();
             panel_encomendas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox_icon_encomendas).BeginInit();
@@ -55,6 +57,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox_dashboard_icon_produtos).BeginInit();
             panel_clientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
             // 
             // pictureBox_aviso_dashboard
@@ -68,15 +71,6 @@
             pictureBox_aviso_dashboard.TabIndex = 13;
             pictureBox_aviso_dashboard.TabStop = false;
             pictureBox_aviso_dashboard.Click += pictureBox_aviso_dashboard_Click_1;
-            // 
-            // panel_grafico
-            // 
-            panel_grafico.BackColor = Color.FromArgb(23, 25, 31);
-            panel_grafico.Cursor = Cursors.Hand;
-            panel_grafico.Location = new Point(26, 105);
-            panel_grafico.Name = "panel_grafico";
-            panel_grafico.Size = new Size(938, 346);
-            panel_grafico.TabIndex = 12;
             // 
             // panel_encomendas
             // 
@@ -270,15 +264,31 @@
             label_dashboard.TabIndex = 7;
             label_dashboard.Text = "Dashboard";
             // 
+            // chart1
+            // 
+            chart1.BackColor = Color.FromArgb(23, 25, 31);
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            chart1.Cursor = Cursors.Hand;
+            chart1.Location = new Point(33, 131);
+            chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
+            chart1.Size = new Size(931, 300);
+            chart1.TabIndex = 14;
+            chart1.Text = "chart1";
+            chart1.Click += panel_Click;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 49, 51);
             ClientSize = new Size(991, 791);
+            Controls.Add(chart1);
             Controls.Add(panel_clientes);
             Controls.Add(pictureBox_aviso_dashboard);
-            Controls.Add(panel_grafico);
             Controls.Add(panel_encomendas);
             Controls.Add(panel_produtos);
             Controls.Add(label_linha_dashboard);
@@ -298,6 +308,7 @@
             panel_clientes.ResumeLayout(false);
             panel_clientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -305,7 +316,6 @@
         #endregion
 
         private PictureBox pictureBox_aviso_dashboard;
-        private Panel panel_grafico;
         private Panel panel_encomendas;
         private Panel panel_produtos;
         private Panel panel_clientes;
@@ -323,5 +333,6 @@
         private PictureBox pictureBox_icon_encomendas;
         private Label label_encomendas;
         private PictureBox pictureBox1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

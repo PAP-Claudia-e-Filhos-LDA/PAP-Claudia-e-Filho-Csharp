@@ -25,10 +25,12 @@ namespace WinFormsApp1
             dataGridView_produtos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView_clientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            //vai fazer as propiedades do panel
             PropiedadesPanel();
         }
         private void PropiedadesPanel()
         {
+            //vai fazer as configurações dos panels
             //fazer o panel ficar com scrollbar 
             panel_encomendas.AutoScroll = false;
             panel_encomendas.HorizontalScroll.Enabled = false;
@@ -76,6 +78,15 @@ namespace WinFormsApp1
             //função que vai preencher tabela dos cleintes
             TabelaClientes();
 
+            //vai preecnher a tabela dos produtos
+            FazerTabelaProdutos();  
+
+            //faz com que as duas comboboxs comecem ja com valores 
+            comboBox_entrega.SelectedIndex = 0;
+            comboBox_pagemento.SelectedIndex = 0;
+        }
+        private void FazerTabelaProdutos()
+        {
             //função que vai preecher a tabela dos produtos para fazer a encomenda
             dataGridView_produtos.RowTemplate.Height = 25;
             TabelaProdutos("encomendar", typeof(DataGridViewCheckBoxColumn));
@@ -88,13 +99,9 @@ namespace WinFormsApp1
 
             TabelaProdutos("fritar", typeof(DataGridViewCheckBoxColumn));
 
-            TabelaProdutos("quantidade",typeof(DataGridViewTextBoxColumn));
+            TabelaProdutos("quantidade", typeof(DataGridViewTextBoxColumn));
             dataGridView_produtos.Columns["Quantidade"].DefaultCellStyle.NullValue = "0";
 
-
-            //faz com que as duas comboboxs comecem ja com valores 
-            comboBox_entrega.SelectedIndex = 0;
-            comboBox_pagemento.SelectedIndex = 0;
         }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -107,7 +114,10 @@ namespace WinFormsApp1
         }
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            //vai adicionar a encomenda
             //Variaveis
+            
+            //Data formatada para a maneira que uso na BD
             DateTime dataAtual = DateTime.Now;
             string dataFormatada = dataAtual.ToString("yyyy-MM-dd");
 
@@ -121,15 +131,17 @@ namespace WinFormsApp1
 
             string mensagem = "Encomenda feita pelo administrador";
 
+            //se nao fizer tab parace que a DataGrid nao guarda os valores que eu escrevi (nao sei pq??)
             SendKeys.SendWait("{TAB}");
 
             //ver os produtos todos
             if (dataGridView_produtos.SelectedRows.Count > 0)
             {
-                string query = @"INSERT INTO Encomendas ('id_encomendas','id_clientes','data_encomenda','metedo_pagamento','metedo_entrega','mensagem') VALUES (@idEncomenda,@idClientes,@Data,@pagamento,@entrega,@mensagem)";
                 //command que vai executar a querry com a conexao e as variaveis certas
+                string query = @"INSERT INTO Encomendas ('id_encomendas','id_clientes','data_encomenda','metedo_pagamento','metedo_entrega','mensagem') VALUES (@idEncomenda,@idClientes,@Data,@pagamento,@entrega,@mensagem)";
                 using (var command = new SQLiteCommand(query, Principal.Funcs.Conectar()))
                 {
+                    //trocar parametros da query
                     command.Parameters.AddWithValue("@idEncomenda", numero_encomendas);
                     command.Parameters.AddWithValue("@idClientes", id);
                     command.Parameters.AddWithValue("@Data", dataFormatada);
@@ -137,6 +149,7 @@ namespace WinFormsApp1
                     command.Parameters.AddWithValue("@entrega", metedo_entrega);
                     command.Parameters.AddWithValue("@mensagem", mensagem);
 
+                    //executa
                     command.ExecuteNonQuery();
                 }
                 //entra aqui e passa so pelos produtos que tem o checkbox de encomendar ativa 
@@ -146,48 +159,46 @@ namespace WinFormsApp1
                     DataGridViewCheckBoxCell encomendar = row.Cells["encomendar"] as DataGridViewCheckBoxCell;
                     if (Convert.ToBoolean(encomendar.Value) == true)
                     {
-                        //variaveis de cada produto
-                        string nomeProduto = row.Cells["nome_produto"].Value.ToString(); 
-                        long idProduto = Principal.Funcs.BuscarID(nomeProduto,"Produtos");
-                        bool congelado = Convert.ToBoolean(row.Cells["fritar"].Value); // true = fritar , false = congelados
-
                         int quantidade = 0;
                         if (int.TryParse(row.Cells["quantidade"].Value.ToString(), out quantidade))
                             quantidade = Convert.ToInt32(row.Cells["quantidade"].Value);
-                        else
-                            quantidade = 0; // Valor padrão caso a conversão falhe
-                        
-
+                        //depois so vai adicionar os produtos que têm mais de 0 quantidades 
                         if (quantidade >= 0)
                         {
-                            string querry = @"INSERT INTO Linha_de_Encomenda ('Encomendas_id_Encomendas','Produtos_id_produto','congelados','quantidade') VALUES (@idEncomenda, @idPRoduto, @congelados ,@quantidade)";
+                            //variaveis de cada produto
+                            string nomeProduto = row.Cells["nome_produto"].Value.ToString(); 
+                            long idProduto = Principal.Funcs.BuscarID(nomeProduto,"Produtos");
+                            bool congelado = Convert.ToBoolean(row.Cells["fritar"].Value); // true = fritar , false = congelados
+
                             //command que vai executar a querry com a conexao e as variaveis certas
+                            string querry = @"INSERT INTO Linha_de_Encomenda ('Encomendas_id_Encomendas','Produtos_id_produto','congelados','quantidade') VALUES (@idEncomenda, @idPRoduto, @congelados ,@quantidade)";
                             using (var command = new SQLiteCommand(querry, Principal.Funcs.Conectar()))
                             {
+                                //vai trocar os parametros
                                 command.Parameters.AddWithValue("@idEncomenda", numero_encomendas);
                                 command.Parameters.AddWithValue("@idPRoduto", idProduto);
                                 command.Parameters.AddWithValue("@congelados", congelado);
                                 command.Parameters.AddWithValue("@quantidade", quantidade);
 
+                                //executa
                                 command.ExecuteNonQuery();
                             }
                         }
                         
                     }
-
                 }
+                //mensagem de aviso (eu nao estou a verificar se a encomenda pode falhar ou nao)
                 MessageBox.Show("Encomenda adicionada com sucesso.", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
+            //refresh
             principal.button_Click(pictureBox_limpar_encomendas, EventArgs.Empty);
-
         }
         private void dataGridView_produtos_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (dataGridView_produtos.CurrentCell.ColumnIndex == dataGridView_produtos.Columns["quantidade"].Index) // Verifica se a célula atual pertence à coluna "quantidade"
+            //vai adicionar a função de permitir numeros e pontos á coluna das quantidades
+            if (dataGridView_produtos.CurrentCell.ColumnIndex == dataGridView_produtos.Columns["quantidade"].Index) 
             {
-                TextBox textBox = e.Control as TextBox; // Obtém o controlo de edição (TextBox) da célula
+                TextBox textBox = e.Control as TextBox; 
 
                 if (textBox != null)
                 {
@@ -209,4 +220,3 @@ namespace WinFormsApp1
         }
     }
 }
-

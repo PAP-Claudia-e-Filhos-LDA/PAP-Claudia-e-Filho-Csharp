@@ -17,9 +17,7 @@ namespace WinFormsApp1
         {
             //vai começar o form com algumas configurações ja feitas
             InitializeComponent();
-            ConfigurarControls();
         }
-
         private void ConfigurarControls()
         {
             //vai arredondar os 3 panels de forma diferente
@@ -33,14 +31,13 @@ namespace WinFormsApp1
             dataGridView_produtos.DefaultCellStyle.SelectionForeColor = Color.White;
             dataGridView_produtos.RowTemplate.Height = 40;
         }
-
         private void Produtos_Load(object sender, EventArgs e)
         {
             //vai fazer estas duas funções quando iniciar e em outras ocasiões
             CarregarProdutos();
             LimparCampos();
+            ConfigurarControls();
         }
-
         private void CarregarProdutos()
         {
             //vai escrever o numero de produtos que existe
@@ -50,7 +47,6 @@ namespace WinFormsApp1
             Principal.Funcs.PreencherDataGridView(dataGridView_produtos, Principal.Funcs.BuscarDados("Produtos"), new[] { "ID", "Nome", "Preço", "Descrição", "Imagem", "Ativo" });
             dataGridView_produtos.Columns["caminho_imagem"].Visible = false;
         }
-
         private void LimparCampos()
         {
             //vai limpar todas as seleções basicamante
@@ -62,7 +58,6 @@ namespace WinFormsApp1
             pictureBox_imagem.Image = null;
             label_msg_erro.Text = "";
         }
-
         private void AdicionarBD(object sender, EventArgs e)
         {
             //função que vai buscar os valores e vai adicionar a base de dados
@@ -77,7 +72,7 @@ namespace WinFormsApp1
             string descricao = textBox_desc.Text.Trim();
             string caminhoDestino = pictureBox_imagem.Image != null ? Path.Combine(@"..\..\..\..\img\Produtos\", $"imagem_produto_{Principal.Funcs.ContarRegistos("Produtos") + 1}.png") : "";
 
-            //vai verificar todas as variaveis 
+            //vai verificar todas as variaveis / se estao vazias escreve um erro com o nome da variavel
             if (string.IsNullOrEmpty(nomeProduto))
                 erros.Add("Nome");
 
@@ -124,16 +119,16 @@ namespace WinFormsApp1
                 }
             }
         }
-
         private void AlterarBD(object sender, EventArgs e)
         {
+            // vai alterar na base de dados o produto
             //variaveis
-            string caminhoDestino = "";
+            string? caminhoDestino = "";
             string nomeProduto = textBox_nome_produto.Text.Trim();
             decimal preco = 0;
             string descricao = textBox_desc.Text.Trim();
 
-            //vai verificar as variavies 
+            //vai verificar as variavies (se estiverem vazias vao ser as que estao na tabela para nao dar update com espaço em branco)
             if (pictureBox_imagem.Image != null && dataGridView_produtos.SelectedRows.Count > 0)
             {
                 DataGridViewRow selectedRow = dataGridView_produtos.SelectedRows[0];
@@ -181,10 +176,7 @@ namespace WinFormsApp1
             }
 
             //querry que avai atualizar
-            string query = @"
-                     UPDATE Produtos 
-                     SET nome_produto = @NomeProduto, preco = @Preco, `desc` = @Descricao, caminho_imagem = @CaminhoImagem 
-                     WHERE id_produto = @IdProduto";
+            string query = @"UPDATE Produtos SET nome_produto = @NomeProduto, preco = @Preco, `desc` = @Descricao, caminho_imagem = @CaminhoImagem WHERE id_produto = @IdProduto";
 
             //vai tentar adicionar 
             try
@@ -216,14 +208,12 @@ namespace WinFormsApp1
             //vai recarregar para atualizar os dados
             Produtos_Load(sender, e);
         }
-
         private void DesativarProduto(string nomeProduto, int ativo)
         {
             //função para alterar o estado de ativo do produto
             string mensagem = ativo == 1 ? "Quer ativar este produto?" : "Quer desativar este produto?";
-            DialogResult result = MessageBox.Show(mensagem, "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes)
+            if (MessageBox.Show(mensagem, "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
@@ -244,7 +234,6 @@ namespace WinFormsApp1
                 }
             }
         }
-
         private void dataGridView_produtos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             //quando dou o primeiro click as cores default mudam e apartir dai vai ficar sempre selecionado
@@ -269,19 +258,18 @@ namespace WinFormsApp1
                     else
                         pictureBox_imagem.Image = null;
                 }
-                catch {
+                catch 
+                {
                     pictureBox_imagem.Image = null;
                     label_msg_erro.Text = "Imagem não encontrada";
                 }
             }
         }
-
         private void pictureBox_icon_Click(object sender, EventArgs e)
         {
             //mensagem a explicar oq e 
             MessageBox.Show("Como usar a janela de alterar produtos:\n\n1)Para alterar um produto dê um click no produto que quer, depois se quiser auto preencher as entrys para saber que produto selecionou faça double click;\n2) Para adicionar um produto não pode ter nenhum produto selecionado;\n3) Para remover faça um click com o botão direito do rato;", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-
         private void pictureBox_icon_limpar_Click(object sender, EventArgs e)
         {
             //função para limpar 
@@ -289,15 +277,16 @@ namespace WinFormsApp1
             if (result == DialogResult.Yes)
                 Produtos_Load(sender, e);
         }
-
         private void button_add_imagem_Click(object sender, EventArgs e)
         {
-            //vai tentar adicionar a imagem
+            //vai tentar adicionar a imagem / se nao der vai dar uma mensagem de erro
             try
             {
+                //vai abrir uma janela para adicionar uma imagem com filtros de tipos de ficheiro
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Todos os Arquivos|*.*";
 
+                //quando fechar vai por a imagem
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                     pictureBox_imagem.Image = Image.FromFile(openFileDialog.FileName);
             }
@@ -306,7 +295,6 @@ namespace WinFormsApp1
                 label_msg_erro.Text = "Tipo de ficheiro errado";
             }
         }
-
         private void pictureBox_icon_confirmar_Click(object sender, EventArgs e)
         {
             //pelas cores vai ver oq tem de fazer
@@ -314,45 +302,48 @@ namespace WinFormsApp1
             Color adicionar = Color.FromArgb(23, 25, 31);
             Color alterar = Color.FromArgb(253, 156, 58);
 
+            //vai comparar as cores para saber oq tem de fazer
             if (corDataGrid.Equals(adicionar))
                 AdicionarBD(sender, e);
             else if (corDataGrid.Equals(alterar))
                 AlterarBD(sender, e);
         }
-
         private void textBox_nome_produto_KeyPress(object sender, KeyPressEventArgs e)
         {
             //nao deixa escrever caracters que eu nao quero
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
                 e.Handled = true;
         }
-
         private void textBox_preço_KeyPress(object sender, KeyPressEventArgs e)
         {
             //nao deixa escrever caracters que eu nao quero
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && !char.IsControl(e.KeyChar))
                 e.Handled = true;
         }
-
         private void dataGridView_produtos_MouseDown(object sender, MouseEventArgs e)
         {
             //quando faço um click com botao direito pergunta se quer apagar 
+            //verifico se é o botao direito
             if (e.Button == MouseButtons.Right)
             {
+                //vejo o numero da linha onde estou 
                 int rowIndex = dataGridView_produtos.HitTest(e.X, e.Y).RowIndex;
 
+                //pelo numero da linha vou desativar esse produto
                 if (rowIndex >= 0 && rowIndex < dataGridView_produtos.Rows.Count)
                 {
                     DataGridViewRow clickedRow = dataGridView_produtos.Rows[rowIndex];
-                    string nomeProduto = clickedRow.Cells["nome_produto"].Value.ToString();
-                    int ativo = clickedRow.Cells["ativo_status"].Value.ToString() == "Sim" ? 0 : 1;
+                    string? nomeProduto = clickedRow.Cells["nome_produto"].Value.ToString();
 
+                    //vai trocar o estado de ativo
+                    int ativo = clickedRow.Cells["ativo_status"].Value.ToString() == "Sim" ? 0 : 1;
                     DesativarProduto(nomeProduto, ativo);
+
+                    //vai dar refresh
                     Produtos_Load(sender, e);
                 }
             }
         }
-
         private void pictureBox_aviso_produtos_Click(object sender, EventArgs e)
         {
             //mensagem de aviso

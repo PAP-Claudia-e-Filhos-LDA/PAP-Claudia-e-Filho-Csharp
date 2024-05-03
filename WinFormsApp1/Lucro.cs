@@ -14,6 +14,7 @@ namespace WinFormsApp1
     {
         public Lucro()
         {
+            //podia fazer isto melhor mas nao quero 
             // vai configurara todos as datagrtidviews
             InitializeComponent();
             foreach (Control objeto in Controls)
@@ -91,7 +92,7 @@ namespace WinFormsApp1
                 tabela.Rows.Add(meses[Convert.ToInt32(arraymes[i]) - 1], arraylucro[i] + " €");
             }
 
-            //vai mostrar a tabela
+            //vai escrever a tabela
             dataGridView_Mes.DataSource = tabela;
         }
         private void PreencherTabelas()
@@ -100,14 +101,11 @@ namespace WinFormsApp1
             //variavel para poder converter a posição do mes em Nome e vice-verça
             string[] meses = { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
 
-            // Obtém o nome do mês da DataGridView
+            //vai usar a variavel meses para saber a posição do mes
             string? nomeMes = dataGridView_Mes.Rows[dataGridView_Mes.SelectedRows[0].Index].Cells["Mês"].Value.ToString();
-
-            // Obtém a posição do mês no array de meses
             int posicaoIndex = Array.IndexOf(meses, nomeMes);
             int posicaoMesInt = posicaoIndex + 1;
-            string posicaoMes = posicaoMesInt.ToString("D2"); // "D2" indica que queremos dois dígitos, preenchendo com zero à esquerda se necessário
-
+            string posicaoMes = posicaoMesInt.ToString("D2");
 
             //vai fazer aqueles que so pedem anos 
             Principal.Funcs.PreencherDataGridView(dataGridView_melhores_compreadores, Principal.Funcs.Lucros(comboBox_anos.Text, posicaoMes.ToString(), "Melhores Clientes,Ano"), new[] { "Nome", "Total Encomendas" });
@@ -124,17 +122,18 @@ namespace WinFormsApp1
         {
             //quando  mudar de anos vai configurar tudo outra vez
             LucroMeses();
-            LabelsAnos_Mes();
-            PreencherTabelas();
+            EscreverDados();
         }
         private void dataGridView_Mes_SelectionChanged(object sender, EventArgs e)
         {
             //quando mudar de mes vai configurar tudo outra vez 
             if (dataGridView_Mes.SelectedRows.Count > 0)
-            {
-                LabelsAnos_Mes();
-                PreencherTabelas();
-            }
+                EscreverDados();
+        }
+        private void EscreverDados()
+        {
+            LabelsAnos_Mes();
+            PreencherTabelas();
         }
         private void pictureBox_aviso_encomendas_Click(object sender, EventArgs e)
         {
@@ -142,6 +141,5 @@ namespace WinFormsApp1
             MessageBox.Show("Esta é a pagina do Lucro, aqui poder ver o lucro de todos os anos e ,meses onde houve encomendas.", "Aviso!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
         }
-
     }
 }

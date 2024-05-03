@@ -9,6 +9,11 @@ namespace WinFormsApp1
         public Clientes()
         {
             InitializeComponent();
+            //quando começar vai fazer todas as configurações iniciais 
+            ConfigGeral();
+        }
+        private void ConfigGeral()
+        {
             //vai iniciar as furnções que vão consfigurar as datagrid view
             ConfigurarDataGridView(dataGridView_clientes);
             ConfigurarDataGridView(dataGridView_melhores_clientes);

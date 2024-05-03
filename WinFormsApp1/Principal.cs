@@ -8,6 +8,7 @@ using static System.Windows.Forms.DataFormats;
 using System.Drawing.Drawing2D;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Windows.Forms.DataVisualization.Charting;
 namespace WinFormsApp1
 {
     // otimizado
@@ -34,13 +35,13 @@ namespace WinFormsApp1
                     conexao.Close();
             }
             public static long ContarRegistos(string tabela)
-            {//calcula no numero de registos
+            {//calcula no numero de registos de uma tabela expecifica
                 SQLiteConnection conexao = Conectar();
                 long num = 0;
                 try
                 {
                     string query = "SELECT COUNT(*) FROM "+tabela+";";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                     {
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
@@ -58,9 +59,8 @@ namespace WinFormsApp1
                 return num;
             }
             public static DataTable BuscarDados(string tabela)
-            {//vai buscar os dados á base de dados e mete na DatagridView
+            {//vai buscar os dados todas á base de dados 
                 string query = "";
-                SQLiteConnection conexao = Conectar();
                 DataTable DadosTabela = new DataTable();
                 switch (tabela)
                 {
@@ -76,7 +76,7 @@ namespace WinFormsApp1
                 }
                 try
                 {
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                     {
                         SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
                         adapter.Fill(DadosTabela);
@@ -91,12 +91,11 @@ namespace WinFormsApp1
             public static DataTable BuscarNomes(string tabela)
             {//vai buscar os nomes á base de dados e mete na DatagridView
                 string campo = char.ToLowerInvariant(tabela[0]) + tabela.Substring(1, tabela.Length - 2);
-                SQLiteConnection conexao = Conectar();
                 DataTable DadosTabela = new DataTable();
                 try
                 {
                     string query = "Select nome_"+campo+" from "+tabela;
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                     {
                         SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
                         adapter.Fill(DadosTabela);
@@ -106,22 +105,22 @@ namespace WinFormsApp1
                 {
                     Desconectar();
                 }
-
                 return DadosTabela;
-
             }
             public static long BuscarID(string nome,string tabela)
-            {//vai buscar o id pelo nome do mesmo
+            {
+                //vai buscar o id pelo nome do mesmo
                 string campo = char.ToLowerInvariant(tabela[0]) + tabela.Substring(1, tabela.Length - 2);
                 string idclientes = campo;
+
                 if (campo == "cliente")
                     idclientes = campo+"s";
-                SQLiteConnection conexao = Conectar();
+
                 long id = 0;
                 try
                 {
                     string query = "SELECT id_"+ idclientes + " from "+tabela+" where nome_"+campo+" = '" + nome + "'";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                     {
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
@@ -160,13 +159,12 @@ namespace WinFormsApp1
                 //vai mostrar todas as encomendas
                 panel_encomendas.Controls.Clear();
 
-                SQLiteConnection conexao = Conectar();
-
                 //vai apenas buscar os dados da encomenda sem os produtos
-                using (SQLiteCommand command = new SQLiteCommand("SELECT Encomendas.id_Encomendas AS 'ID Encomenda', Clientes.nome_cliente AS 'Nome do Cliente', Encomendas.data_encomenda AS 'Data', CASE WHEN Encomendas.metedo_pagamento = 0 THEN 'Pagamento em Mãos' ELSE 'MBway' END AS 'Método de Pagamento', CASE WHEN Encomendas.metedo_entrega = 0 THEN 'Pickup' ELSE 'Entrega ao domicílio' END AS 'Método de Entrega', Encomendas.mensagem FROM Encomendas JOIN Clientes ON Encomendas.id_clientes = Clientes.id_clientes ORDER BY Encomendas.id_Encomendas ;", conexao))
+                using (SQLiteCommand command = new SQLiteCommand("SELECT Encomendas.id_Encomendas AS 'ID Encomenda', Clientes.nome_cliente AS 'Nome do Cliente', Encomendas.data_encomenda AS 'Data', CASE WHEN Encomendas.metedo_pagamento = 0 THEN 'Pagamento em Mãos' ELSE 'MBway' END AS 'Método de Pagamento', CASE WHEN Encomendas.metedo_entrega = 0 THEN 'Pickup' ELSE 'Entrega ao domicílio' END AS 'Método de Entrega', Encomendas.mensagem FROM Encomendas JOIN Clientes ON Encomendas.id_clientes = Clientes.id_clientes ORDER BY Encomendas.id_Encomendas ;", Conectar()))
                 {
                     using (SQLiteDataReader reader = command.ExecuteReader())
                     {
+                        //vai contar o numero da encomedna
                         int linhaEncomenda = 0;
 
                         while (reader.Read())
@@ -188,7 +186,7 @@ namespace WinFormsApp1
                             double totalEncomenda = 0;
 
                             //pelo id da encomenda que esta atras vai ver todos os produtos e as suas caracteristicas 
-                            using (SQLiteCommand productsCommand = new SQLiteCommand("SELECT Produtos.nome_produto, Linha_de_Encomenda.quantidade, CASE WHEN Produtos.nome_produto LIKE '%Rissol%' OR Produtos.nome_produto LIKE '%Rissois%' OR Produtos.nome_produto LIKE '%Croquete%' OR Produtos.nome_produto LIKE '%Trouxa%' THEN Linha_de_Encomenda.congelados ELSE '' END AS congelados, Produtos.preco FROM Linha_de_Encomenda JOIN Produtos ON Linha_de_Encomenda.Produtos_id_produto = Produtos.id_produto WHERE Linha_de_Encomenda.Encomendas_id_Encomendas = @IdEncomenda;", conexao))
+                            using (SQLiteCommand productsCommand = new SQLiteCommand("SELECT Produtos.nome_produto, Linha_de_Encomenda.quantidade, CASE WHEN Produtos.nome_produto LIKE '%Rissol%' OR Produtos.nome_produto LIKE '%Rissois%' OR Produtos.nome_produto LIKE '%Croquete%' OR Produtos.nome_produto LIKE '%Trouxa%' THEN Linha_de_Encomenda.congelados ELSE '' END AS congelados, Produtos.preco FROM Linha_de_Encomenda JOIN Produtos ON Linha_de_Encomenda.Produtos_id_produto = Produtos.id_produto WHERE Linha_de_Encomenda.Encomendas_id_Encomendas = @IdEncomenda;", Conectar()))
                             {
                                 productsCommand.Parameters.AddWithValue("@IdEncomenda", idEncomenda);
                                 using (SQLiteDataReader productsReader = productsCommand.ExecuteReader())
@@ -211,9 +209,10 @@ namespace WinFormsApp1
                                     }
                                 }
                             }
+                            //vai escrever o total e escrevr na formatação certa
                             encomendaInfo += "Total da Encomenda: " + totalEncomenda.ToString("F2") + "€\n\n";
 
-
+                            //vai criar uma label e escrever o texto da encomenda
                             Label encomendaLabel = new Label();
                             encomendaLabel.Text = encomendaInfo;
                             encomendaLabel.Font = new Font("", 10);
@@ -233,42 +232,35 @@ namespace WinFormsApp1
             { //vai mostrar os anos de serviço
                 List<string> anos = new List<string>();
 
-                using (SQLiteConnection conexao = Conectar())
+                string query = "SELECT DISTINCT strftime('%Y', data_encomenda) FROM Encomendas";
+                using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                 {
-                    string query = "SELECT DISTINCT strftime('%Y', data_encomenda) FROM Encomendas";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    using (SQLiteDataReader reader = command.ExecuteReader())
                     {
-                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                anos.Add(reader.GetString(0)); 
-                            }
+                            anos.Add(reader.GetString(0)); 
                         }
                     }
                 }
-
                 return anos;
             }
             public static List<string> MesesTotal(bool fazer, string ano)
             { //vou fazer isto duas vezes , 1) para saber o numero do mes , 2)para saber o lucro desse mes
                 List<string> dados = new List<string>();
 
-                using (SQLiteConnection conexao = Conectar())
+                string query = "SELECT strftime('%m', data_encomenda) AS mes, SUM(preco_produto * quantidade) AS total_lucro FROM Encomendas JOIN Linha_de_Encomenda ON Encomendas.id_Encomendas = Linha_de_Encomenda.Encomendas_id_Encomendas JOIN Produtos ON Linha_de_Encomenda.Produtos_id_produto = Produtos.id_produto WHERE strftime('%Y', data_encomenda) = @ano GROUP BY mes ORDER BY mes;";
+                using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                 {
-                    string query = "SELECT strftime('%m', data_encomenda) AS mes, SUM(preco_produto * quantidade) AS total_lucro FROM Encomendas JOIN Linha_de_Encomenda ON Encomendas.id_Encomendas = Linha_de_Encomenda.Encomendas_id_Encomendas JOIN Produtos ON Linha_de_Encomenda.Produtos_id_produto = Produtos.id_produto WHERE strftime('%Y', data_encomenda) = @ano GROUP BY mes ORDER BY mes;";
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    command.Parameters.AddWithValue("@ano", ano);
+                    using (SQLiteDataReader reader = command.ExecuteReader())
                     {
-                        command.Parameters.AddWithValue("@ano", ano);
-                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                if(fazer)
-                                    dados.Add(reader.GetString(0));
-                                else
-                                    dados.Add(reader.GetDecimal(1).ToString());
-                            }
+                            if(fazer)
+                                dados.Add(reader.GetString(0));
+                            else
+                                dados.Add(reader.GetDecimal(1).ToString());
                         }
                     }
                 }
@@ -277,10 +269,10 @@ namespace WinFormsApp1
             public static DataTable Lucros(string ano, string mes,string fazer) 
             {//dependendo do ano do mes e do que vou fazer vai fazer querys diferntes
                 string query = "";
-                SQLiteConnection conexao = Conectar();
                 DataTable DadosTabela = new DataTable();
                 try
                 {
+                    //vai fazer oq eu escrevi no fazer
                     switch (fazer)
                     {
                         case "Melhores Clientes,Ano":
@@ -302,7 +294,7 @@ namespace WinFormsApp1
                             query = "SELECT SUM(le.quantidade * le.preco_produto) || ' €' AS lucro_total FROM Linha_de_Encomenda le JOIN Encomendas e ON le.Encomendas_id_Encomendas = e.id_Encomendas WHERE strftime('%Y', e.data_encomenda) = @ano AND strftime('%m', e.data_encomenda) = @mes;\r\n";
                             break;
                     }
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                     {
                         command.Parameters.AddWithValue("@ano", ano);
                         command.Parameters.AddWithValue("@mes", mes);
@@ -318,21 +310,20 @@ namespace WinFormsApp1
             }
             public static List<string> DadosMensagens(bool ano,bool mes , bool cliente, bool assunto)
             {
+                //dependendo dos dados que estiverem false vai fazer certas querys
                 string query = "";
                 List<string> dados = new List<string>();
 
-                using (SQLiteConnection conexao = Conectar())
-                {
-                    if(ano)
-                        query = "SELECT DISTINCT strftime('%Y', data_mensagem) FROM Mensagens_Clientes";
-                    if(mes)
-                         query = @" SELECT DISTINCT strftime('%m', data_mensagem) AS meses_diferentes FROM Mensagens_Clientes; ";
-                    if(cliente)
-                        query = @" SELECT DISTINCT(c.nome_cliente) FROM Clientes c INNER JOIN Mensagens_Clientes mc ON c.id_clientes = mc.id_cliente;";
-                    if (assunto)
-                        query = @"SELECT DISTINCT A.nome_assunto FROM Mensagens_Clientes AS MC JOIN Assuntos AS A ON MC.id_assunto = A.id_assunto JOIN Clientes AS C ON MC.id_cliente = C.id_clientes";
+                if (ano)
+                    query = "SELECT DISTINCT strftime('%Y', data_mensagem) FROM Mensagens_Clientes";
+                if (mes)
+                    query = @" SELECT DISTINCT strftime('%m', data_mensagem) AS meses_diferentes FROM Mensagens_Clientes; ";
+                if (cliente)
+                    query = @" SELECT DISTINCT(c.nome_cliente) FROM Clientes c INNER JOIN Mensagens_Clientes mc ON c.id_clientes = mc.id_cliente;";
+                if (assunto)
+                    query = @"SELECT DISTINCT A.nome_assunto FROM Mensagens_Clientes AS MC JOIN Assuntos AS A ON MC.id_assunto = A.id_assunto JOIN Clientes AS C ON MC.id_cliente = C.id_clientes";
 
-                    using (SQLiteCommand command = new SQLiteCommand(query, conexao))
+                    using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
                     {
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
@@ -342,17 +333,15 @@ namespace WinFormsApp1
                             }
                         }
                     }
-                }
-
                 return dados;
             }
             public static void MostrarMensagens(Panel panel_mensagens, string ano, string mes, string cliente, string assunto)
             {
-                string query = @"SELECT MC.id_mensagem, C.nome_cliente, MC.mensagem, C.imagem_perfil, A.nome_assunto 
-                    FROM Mensagens_Clientes AS MC  
-                    JOIN Clientes AS C ON MC.id_cliente = C.id_clientes  
-                    LEFT JOIN Assuntos AS A ON MC.id_assunto = A.id_assunto";
+                //vai mostrar as mensagens dependendo dos dados que existem
+                string query = @"SELECT MC.id_mensagem, C.nome_cliente, MC.mensagem, C.imagem_perfil, A.nome_assunto FROM Mensagens_Clientes AS MC JOIN Clientes AS C ON MC.id_cliente = C.id_clientes LEFT JOIN Assuntos AS A ON MC.id_assunto = A.id_assunto";
 
+                //se os paramentros da função tiverem null vai mostrar as mensagens de maneira diferente
+                //vai adicionando coisa á query
                 List<string> conditions = new List<string>();
                 if (ano != null)
                     conditions.Add("strftime('%Y', MC.data_mensagem) = @ano");
@@ -362,59 +351,62 @@ namespace WinFormsApp1
                     conditions.Add("C.nome_cliente = @cliente");
                 if (assunto != null)
                     conditions.Add("A.nome_assunto = @assunto");
-
+                
+                //aqui escrevr tudo oq guardou na query
                 if (conditions.Count > 0)
                     query += " WHERE " + string.Join(" AND ", conditions);
 
-                // Limpa todos os controles dentro do panel_mensagens
+                //apaga todas as mensagens anteriores
                 panel_mensagens.Controls.Clear();
+
+                //mensagem default (pois nao faria eu escrever uma opinião de um cliente sendo que sou eu que estou a fazer)
                 string mensagemInfo = "Não existem mensagens com essas configurações.";
 
-                // Conecta ao banco de dados
-                using (SQLiteConnection conexao = Conectar())
+                //vai executar a query
+                using (var command = new SQLiteCommand(query, Conectar()))
                 {
-                    // Cria um comando para executar a consulta
-                    using (var command = new SQLiteCommand(query, conexao))
+                    if (conditions.Count > 0)
                     {
-                        if (conditions.Count > 0)
-                        {
-                            command.Parameters.AddWithValue("@ano", ano);
-                            command.Parameters.AddWithValue("@mes", mes);
-                            command.Parameters.AddWithValue("@cliente", cliente);
-                            command.Parameters.AddWithValue("@assunto", assunto);
-                        }
+                        //se todos os valores tiverem vazios nao vai trocar nada / se nao tiverem vai trocar (e nao tem problema trocar valores mesmo que eles nao existem na query)
+                        command.Parameters.AddWithValue("@ano", ano);
+                        command.Parameters.AddWithValue("@mes", mes);
+                        command.Parameters.AddWithValue("@cliente", cliente);
+                        command.Parameters.AddWithValue("@assunto", assunto);
+                    }
 
-                        using (var reader = command.ExecuteReader())
+                    //vai executar
+                    using (var reader = command.ExecuteReader())
+                    {
+                        //se tiver linha faz isto
+                        if (reader.HasRows)
                         {
-                            if (reader.HasRows)
+                            //vai escrever as mensagens todas numa unica string
+                            mensagemInfo = "";
+                            while (reader.Read())
                             {
-                                mensagemInfo = "";
-                                while (reader.Read())
-                                {
-                                    int id_mensagem = reader.GetInt32(0);
-                                    string nome_cliente = reader.GetString(1);
-                                    string mensagem = reader.GetString(2);
-                                    // string imagem_perfil = reader.IsDBNull(3) ? "" : reader.GetString(3);
-                                    string imagem_perfil = @"C:\Users\tecnimoplas.TECNIMOPLAS\Desktop\Trabalho\img\icons\user.png";
-                                    string nome_assunto = reader.IsDBNull(4) ? "" : reader.GetString(4);
+                                //vai buscar as varieveis
+                                int id_mensagem = reader.GetInt32(0);
+                                string nome_cliente = reader.GetString(1);
+                                string mensagem = reader.GetString(2);
+                                string imagem_perfil = reader.IsDBNull(3) ? "" : reader.GetString(3);
+                                string nome_assunto = reader.IsDBNull(4) ? "" : reader.GetString(4);
 
-                                    // Crie os controles para exibir a mensagem
-                                    mensagemInfo += $"Mensagem Nº: {id_mensagem}\nCliente: {nome_cliente}\nMensagem: {mensagem}\nAssunto:{nome_assunto} \n\n\n";
+                                //vai adicionar tudo á string
+                                mensagemInfo += "Mensagem Nº: " + id_mensagem + "\nCliente: " + nome_cliente + "\nMensagem: " + mensagem + "\nAssunto: " + nome_assunto + "\n\n\n";
 
-                                    // Cria uma PictureBox para exibir a imagem de perfil
-                                    PictureBox pictureBox = new PictureBox();
-                                    pictureBox.ImageLocation = imagem_perfil; // Define a imagem de perfil
-                                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // Define o modo de exibição da imagem
-                                    pictureBox.Size = new Size(75, 75); // Define o tamanho da PictureBox
-                                    pictureBox.Location = new Point(10, panel_mensagens.Controls.Count * 120); // Define a posição da PictureBox
-                                    panel_mensagens.Controls.Add(pictureBox); // Adiciona a PictureBox ao painel
-                                }
+                                //vai fazer a imagem de perfil
+                                PictureBox pictureBox = new PictureBox();
+                                pictureBox.ImageLocation = imagem_perfil; 
+                                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; 
+                                pictureBox.Size = new Size(75, 75); 
+                                pictureBox.Location = new Point(10, panel_mensagens.Controls.Count * 120); 
+                                panel_mensagens.Controls.Add(pictureBox);
                             }
                         }
                     }
                 }
 
-                // Cria uma Label para exibir as mensagens
+                //vai criar uma label e por o texto tudo nela 
                 Label label_mensagem = new Label();
                 label_mensagem.Text = mensagemInfo;
                 label_mensagem.Font = new Font("", 12);
@@ -423,18 +415,47 @@ namespace WinFormsApp1
                 label_mensagem.Padding = new Padding(100, 0, 0, 0);
                 panel_mensagens.Controls.Add(label_mensagem);
 
-                // Atualiza a exibição
+                //da refresh e adiciona tudo
                 panel_mensagens.PerformLayout();
             }
+            public static DataTable ObterAssuntos()
+            {
+                //vai mostrar todos os assuntos 
+                DataTable dataTable = new DataTable();
 
+                using (SQLiteConnection conexao = Conectar())
+                {
+                    string query = @"SELECT * from Assuntos";
 
+                    using (SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, conexao))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+                }
+                return dataTable;
+            }
+            public static List<string> Grafico(bool fazer)
+            { //vou fazer isto duas vezes , 1) para saber o numero do mes , 2)para saber o lucro desse mes
+
+                List<string> dados = new List<string>();
+
+                string query = "SELECT strftime('%Y-%m', E.\"data_encomenda\") AS month, SUM(LE.\"preco_produto\" * LE.\"quantidade\") AS total_amount FROM \"Encomendas\" AS E JOIN \"Linha_de_Encomenda\" AS LE ON E.\"id_Encomendas\" = LE.\"Encomendas_id_Encomendas\" GROUP BY month ORDER BY month";
+                using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
+                {
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (fazer)
+                                dados.Add(reader.GetString(0));
+                            else
+                                dados.Add(reader.GetDecimal(1).ToString());
+                        }
+                    }
+                }
+                return dados;
+            }
         }
-
-
-
-
-
-
 
         //coisa para fazer curvas redondas
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -445,14 +466,11 @@ namespace WinFormsApp1
             //quando o programa liga vai fazer o form redondo
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //vai carregar no botao dashboard para ficar selecionado e com a janela do dashboard ativa
             button_Click(button_dashboard,e);
-            MostrarFormulario(new Dashboard(this));
         }
-
         private void SetNavigation(object sender)
         {
             //função para mudar as cores e parecer que esta selecionado
@@ -470,7 +488,6 @@ namespace WinFormsApp1
                 clickedButton.BackColor = Color.FromArgb(76, 79, 81);
             }
         }
-
         public void button_Click(object sender, EventArgs e)
         {
             //quando eu carrego em um botao , panel de outro form vai fazer esta função 
@@ -533,10 +550,12 @@ namespace WinFormsApp1
                             break;
                     }
                     break;
-
+                case(Chart cht):
+                    SetNavigation(button_lucro);
+                    MostrarFormulario(new Lucro());
+                    break;
             }
         }
-
         private void MostrarFormulario(Form formulario)
         {
             //meto o form que vou trabalhar dentro do form principal
@@ -550,7 +569,6 @@ namespace WinFormsApp1
 
             formulario.Show();
         }
-
         private void button_sair_Click(object sender, EventArgs e)
         {
             //botao de sair
