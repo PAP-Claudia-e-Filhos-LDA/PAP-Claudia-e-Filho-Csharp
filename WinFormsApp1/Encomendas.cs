@@ -92,7 +92,7 @@ namespace WinFormsApp1
             TabelaProdutos("encomendar", typeof(DataGridViewCheckBoxColumn));
 
             //coluna com o nomes dos produtos
-            dataGridView_produtos.DataSource = Principal.Funcs.BuscarNomes("Produtos");
+            dataGridView_produtos.DataSource = Principal.Funcs.BuscarDadosAtivos();
             dataGridView_produtos.Columns["nome_produto"].HeaderText = "Produto";
             dataGridView_produtos.Columns["nome_produto"].ReadOnly = true;
             dataGridView_produtos.RowTemplate.Height = 25;

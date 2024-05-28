@@ -455,6 +455,25 @@ namespace WinFormsApp1
                 }
                 return dados;
             }
+            public static DataTable BuscarDadosAtivos()
+            {
+                //vai buscar os dados todas á base de dados 
+                string query = "Select nome_produto from Produtos where ativo = 1";
+                DataTable DadosTabela = new DataTable();
+                try
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(query, Conectar()))
+                    {
+                        SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+                        adapter.Fill(DadosTabela);
+                    }
+                }
+                finally
+                {
+                    Desconectar();
+                }
+                return DadosTabela;
+            }
         }
 
         //coisa para fazer curvas redondas

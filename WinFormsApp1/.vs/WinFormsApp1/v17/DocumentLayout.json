@@ -1,17 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\",
+  "WorkspaceRootPath": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\ricardo duarte\\desktop\\trabalhos escola\\trabalhos_escola\\pap-claudia-e-filhos\\pap-claudia-e-filho-csharp\\winformsapp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:dashboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\tecnimoplas.tecnimoplas\\desktop\\trabalho\\winformsapp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\ricardo duarte\\desktop\\trabalhos escola\\trabalhos_escola\\pap-claudia-e-filhos\\pap-claudia-e-filho-csharp\\winformsapp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -27,40 +23,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Dashboard.cs",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Dashboard.cs",
-              "RelativeDocumentMoniker": "Dashboard.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Dashboard.cs",
-              "RelativeToolTip": "Dashboard.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAswFYAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T15:29:05.458Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Principal.cs",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Principal.cs",
+              "Title": "Principal.cs [Projeto]",
+              "DocumentMoniker": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs",
               "RelativeDocumentMoniker": "Principal.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Principal.cs",
-              "RelativeToolTip": "Principal.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAJsAAAANAAAA",
+              "ToolTip": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs [Projeto]",
+              "RelativeToolTip": "Principal.cs [Projeto]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T15:28:56.872Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-28T17:35:41.932Z",
+              "EditorCaption": " [Projeto]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Dashboard.cs [Projeto]",
-              "DocumentMoniker": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Dashboard.cs",
-              "RelativeDocumentMoniker": "Dashboard.cs",
-              "ToolTip": "C:\\Users\\tecnimoplas.TECNIMOPLAS\\Desktop\\Trabalho\\WinFormsApp1\\Dashboard.cs [Projeto]",
-              "RelativeToolTip": "Dashboard.cs [Projeto]",
+              "Title": "Principal.cs",
+              "DocumentMoniker": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs",
+              "RelativeDocumentMoniker": "Principal.cs",
+              "ToolTip": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs",
+              "RelativeToolTip": "Principal.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T14:03:36.471Z",
-              "EditorCaption": " [Projeto]"
+              "WhenOpened": "2024-05-06T07:19:18.399Z"
             }
           ]
         }

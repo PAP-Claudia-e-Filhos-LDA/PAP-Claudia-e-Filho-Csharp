@@ -198,7 +198,6 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(label10);
             panel1.Controls.Add(label_titulo_ano);
-            panel1.Cursor = Cursors.Hand;
             panel1.Location = new Point(352, 127);
             panel1.Name = "panel1";
             panel1.Size = new Size(571, 281);
@@ -412,7 +411,6 @@
             Panel12.Controls.Add(label4);
             Panel12.Controls.Add(label5);
             Panel12.Controls.Add(label_titulo_mes);
-            Panel12.Cursor = Cursors.Hand;
             Panel12.Location = new Point(352, 477);
             Panel12.Name = "Panel12";
             Panel12.Size = new Size(571, 281);

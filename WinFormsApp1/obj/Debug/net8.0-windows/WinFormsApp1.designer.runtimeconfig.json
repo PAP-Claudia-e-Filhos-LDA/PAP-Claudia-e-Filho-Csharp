@@ -12,9 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\tecnimoplas.TECNIMOPLAS\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\tecnimoplas.TECNIMOPLAS\\.nuget\\packages",
-      "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      "C:\\Users\\Ricardo Duarte\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Ricardo Duarte\\.nuget\\packages"
     ],
     "configProperties": {
       "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": true,

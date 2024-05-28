@@ -65,7 +65,6 @@
             panel_clientes.Controls.Add(label_linha_dashboard_clientes);
             panel_clientes.Controls.Add(label_dashboard_clientes);
             panel_clientes.Controls.Add(pictureBox_dashboard_icon_clientes);
-            panel_clientes.Cursor = Cursors.Hand;
             panel_clientes.Location = new Point(679, 100);
             panel_clientes.Name = "panel_clientes";
             panel_clientes.Size = new Size(287, 160);

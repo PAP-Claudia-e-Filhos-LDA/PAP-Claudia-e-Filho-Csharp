@@ -301,7 +301,6 @@
             // panel_encomendas
             // 
             panel_encomendas.BackColor = Color.FromArgb(23, 25, 31);
-            panel_encomendas.Cursor = Cursors.Hand;
             panel_encomendas.Location = new Point(575, 172);
             panel_encomendas.Name = "panel_encomendas";
             panel_encomendas.Size = new Size(388, 589);
