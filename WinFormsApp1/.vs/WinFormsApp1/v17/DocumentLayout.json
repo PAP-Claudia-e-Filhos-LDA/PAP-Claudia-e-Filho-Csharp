@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\ricardo duarte\\desktop\\trabalhos escola\\trabalhos_escola\\pap-claudia-e-filhos\\pap-claudia-e-filho-csharp\\winformsapp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|c:\\users\\ricardo duarte\\desktop\\trabalhos escola\\trabalhos_escola\\pap-claudia-e-filhos\\pap-claudia-e-filho-csharp\\winformsapp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{D00C5CC8-D0E8-4658-8C58-E3265C7ABF38}|WinFormsApp1.csproj|solutionrelative:principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,31 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Principal.cs [Projeto]",
+              "DocumentIndex": 1,
+              "Title": "Principal.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs",
               "RelativeDocumentMoniker": "Principal.cs",
-              "ToolTip": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs [Projeto]",
-              "RelativeToolTip": "Principal.cs [Projeto]",
+              "ToolTip": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs [Design]",
+              "RelativeToolTip": "Principal.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-28T17:35:41.932Z",
-              "EditorCaption": " [Projeto]"
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Principal.cs",
               "DocumentMoniker": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs",
               "RelativeDocumentMoniker": "Principal.cs",
               "ToolTip": "C:\\Users\\Ricardo Duarte\\Desktop\\Trabalhos Escola\\Trabalhos_Escola\\PAP-Claudia-e-Filhos\\PAP-Claudia-e-Filho-Csharp\\WinFormsApp1\\Principal.cs",
               "RelativeToolTip": "Principal.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAA1AAAA",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAIwOMBAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-06T07:19:18.399Z"
+              "WhenOpened": "2024-05-06T07:19:18.399Z",
+              "EditorCaption": ""
             }
           ]
         }
